@@ -3,15 +3,17 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Gilroy', sans-serif;
-  src: url(./assets/fonts/gilroy-medium.ttf);
+  font-family: 'Gilroy';
+  src: url('./assets/fonts/gilroy-medium.ttf') format('truetype');
   font-weight: 500;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: 'Gilroy', sans-serif;
-  src: url(./assets/fonts/gilroy-bold.ttf);
+  font-family: 'Gilroy';
+  src: url('./assets/fonts/gilroy-bold.ttf') format('truetype');
   font-weight: 700;
+  font-style: normal;
 }
 
 
