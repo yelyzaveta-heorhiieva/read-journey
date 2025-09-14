@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Gilroy', sans-serif;
+  src: url(./assets/fonts/gilroy-medium.ttf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Gilroy', sans-serif;
+  src: url(./assets/fonts/gilroy-bold.ttf);
+  font-weight: 700;
+}
+
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #141414;
+  font-family: 'Gilroy', sans-serif;
+  color: #f9f9f9;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  line-height: 1;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  font-style: normal;
+  color: currentColor;
+  line-height: 1;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  object-fit: cover;
+  height: auto;
+}
+
+button {
+  display: block;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  color: currentColor;
+  border: none;
+  line-height: 1;
+}
