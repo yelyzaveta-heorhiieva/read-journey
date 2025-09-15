@@ -1,22 +1,46 @@
-import { lazy, useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import Layout from "./components/Layout";
-import PrivateRoute from "./components/PrivateRoute";
-import RestrictedRoute from "./components/RestrictedRoute";
-import NotFoundPage from "./pages/NotFoundPage";
-
-
+import { lazy, useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
+import PrivateRoute from './components/PrivateRoute';
+import RestrictedRoute from './components/RestrictedRoute';
+import NotFoundPage from './pages/NotFoundPage';
+import { useDispatch, useSelector } from 'react-redux';
+import type { AppDispatch } from './redux/store';
+import {
+  selectIsLogged,
+  selectIsRefreshing,
+} from './redux/selectors';
+import { getCurrentUser, refreshToken } from './redux/auth/operations';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const isRefreshing = useSelector(selectIsRefreshing);
+  const isLoggedIn = useSelector(selectIsLogged);
 
-  const RegistrationPage = lazy(() => import('./pages/RegistrationPage'))
+  useEffect(() => {
+    const fetchUser = async () => {
+      const result = await dispatch(getCurrentUser());
+      if (
+        getCurrentUser.rejected.match(result) &&
+        result.payload === 'Request failed with status code 401'
+      ) {
+        const refreshResult = await dispatch(refreshToken());
+        if (refreshToken.fulfilled.match(refreshResult)) {
+          dispatch(getCurrentUser());
+        }
+      }
+    };
+
+    if (isLoggedIn) fetchUser();
+  }, [dispatch, isLoggedIn]);
+
+  const RegistrationPage = lazy(() => import('./pages/RegistrationPage'));
   const LoginPage = lazy(() => import('./pages/LoginPage'));
   const MainLayoutPage = lazy(() => import('./pages/MainLayoutPage'));
 
-
-  return (
-    <>
+  return (isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
       <Layout>
         <Routes>
           <Route
@@ -25,18 +49,13 @@ function App() {
               <RestrictedRoute
                 redirectTo='/'
                 component={<RegistrationPage />}
-                isLoggedIn={isLoggedIn}
               />
             }
           />
           <Route
             path='/login'
             element={
-              <RestrictedRoute
-                redirectTo='/'
-                component={<LoginPage />}
-                isLoggedIn={isLoggedIn}
-              />
+              <RestrictedRoute redirectTo='/' component={<LoginPage />} />
             }
           />
           <Route
@@ -45,15 +64,14 @@ function App() {
               <PrivateRoute
                 redirectTo='/login'
                 component={<MainLayoutPage />}
-                isLoggedIn={isLoggedIn}
               />
             }
           />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </Layout>
-    </>
+    )
   );
 }
 
-export default App
+export default App;

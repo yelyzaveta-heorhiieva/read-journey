@@ -8,10 +8,11 @@ import * as Yup from 'yup';
 
 export interface AuthFormProps {
   isRegister: boolean;
-  link: { to: string; text: string };
+    link: { to: string; text: string };
+    handleSubmit: (values: AuthFormValues) => void
 }
 
-export default function AuthForm({ isRegister, link }: AuthFormProps) {
+export default function AuthForm({ isRegister, link, handleSubmit }: AuthFormProps) {
   const [show, setShow] = useState(false);
   const isBigScreen = useMediaQuery({
     query: '(min-width: 1280px)',
@@ -22,9 +23,6 @@ export default function AuthForm({ isRegister, link }: AuthFormProps) {
     email: '',
     password: '',
   };
-  const handleSubmit = (values: AuthFormValues) => {
-    console.log(values);
-  };
 
   const validationSchema = Yup.object().shape({
     name: isRegister
@@ -33,12 +31,15 @@ export default function AuthForm({ isRegister, link }: AuthFormProps) {
           .max(50, 'Too long!')
           .required('Required')
       : Yup.string().notRequired(),
-    email: Yup.string().email('Invalid email').required('Required!'),
+    email: Yup.string()
+      .email('Invalid email')
+      .required('Required!')
+      .matches(
+        /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
+        'Must be in format user123@gmail.com',
+      ),
     password: Yup.string()
-      .min(8, 'Password must be at least 8 characters long')
-      .matches(/[A-Z]/, 'Must contain at least one uppercase latin letter')
-      .matches(/[a-z]/, 'Must contain at least one lowercase latin letter')
-      .matches(/\d/, 'Must contain at least one number')
+      .min(7, 'Password must be at least 7 characters long')
       .required('Required!'),
   });
 
@@ -48,7 +49,7 @@ export default function AuthForm({ isRegister, link }: AuthFormProps) {
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
-      {({ isValid, errors, touched, dirty }) => (
+      {({ isValid, errors, touched }) => (
         <Form className='flex flex-col gap-2 md:gap-[14px]'>
           {isRegister && (
             <Input
@@ -107,12 +108,8 @@ export default function AuthForm({ isRegister, link }: AuthFormProps) {
           >
             <button
               type='submit'
-              disabled={!isValid || !dirty}
-              className={` h-[42px] md:h-[52px] bg-[#f9f9f9] rounded-[30px] flex items-center justify-center font-bold text-sm md:text-xl md:leading-[100%] leading-[129%] tracking-[0.02em] text-[#1f1f1f] ${
-                !dirty || !isValid
-                  ? 'bg-zinc-600'
-                  : 'hover:border hover:border-solid hover:border-[rgba(249,249,249,0.2)] hover:bg-transparent hover:text-[#f9f9f9] transition-all duration-300 '
-              }
+              disabled={!isValid}
+              className={` h-[42px] md:h-[52px] bg-[#f9f9f9] rounded-[30px] flex items-center justify-center font-bold text-sm md:text-xl md:leading-[100%] leading-[129%] tracking-[0.02em] text-[#1f1f1f] hover:border hover:border-solid hover:border-[rgba(249,249,249,0.2)] hover:bg-transparent hover:text-[#f9f9f9] transition-all duration-300
             ${
               isRegister ? 'w-[140px] md:w-[225px]' : 'w-[131px] md:w-[166px]'
             }`}
