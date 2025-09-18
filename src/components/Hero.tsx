@@ -10,7 +10,7 @@ export default function Hero({ }: HeroProps) {
     const isMediumScreen = useMediaQuery({ minWidth: 768, maxWidth: 1279 });
   return isMediumScreen ? null : (
     <div className='flex px-10 xl:px-0 xl:min-w-[600px] justify-center xl:pt-20 pt-5 rounded-[30px] bg-[#1f1f1f]'>
-      <picture className=''>
+      <picture>
         <source
           media='(min-width: 1280px)'
           srcSet={`${phoneDesk} 1x, ${phoneDesk_2x} 2x`}

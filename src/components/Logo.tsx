@@ -1,5 +1,6 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
+import { Link } from 'react-router-dom';
 
 export interface LogoProps {
   classNames?: string;
@@ -17,7 +18,7 @@ export default function Logo({classNames, isHeader }: LogoProps) {
   const shouldShow = (isHeader && isDesk) || (!isHeader && !isMob);
   
   return (
-    <div className={`flex gap-1 items-center ${classNames || ''}`}>
+    <Link to='/' className={`flex gap-1 items-center ${classNames || ''}`}>
       <svg width='42' height='17' className='fill-[#F9F9F9] '>
         <use href='/icons.svg#logo'></use>
       </svg>{' '}
@@ -26,6 +27,6 @@ export default function Logo({classNames, isHeader }: LogoProps) {
           read journey
         </p>
       )}
-    </div>
+    </Link>
   );
 };

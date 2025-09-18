@@ -59,6 +59,7 @@ export default function AuthForm({ isRegister, link, handleSubmit }: AuthFormPro
               name='name'
               error={errors.name}
               touched={touched.name}
+              isValidate={true}
             />
           )}
           <Input
@@ -68,6 +69,7 @@ export default function AuthForm({ isRegister, link, handleSubmit }: AuthFormPro
             name='email'
             error={errors.email}
             touched={touched.email}
+            isValidate={true}
           />
           {
             <Input
@@ -79,6 +81,7 @@ export default function AuthForm({ isRegister, link, handleSubmit }: AuthFormPro
               touched={touched.password}
               onMouseEnter={() => setShow(true)}
               onMouseLeave={() => setShow(false)}
+              isValidate={true}
             >
               {((!errors.password && !touched.password) || show) && (
                 <button

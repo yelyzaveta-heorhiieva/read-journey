@@ -7,14 +7,14 @@ import {
   register,
 } from './operations';
 
-interface AuthState {
+export interface AuthState {
   user: string | null;
   token: string | null;
   isRefreshing: boolean;
   isLoggedIn: boolean;
 }
 
-const initialState: AuthState = {
+ const initialState: AuthState = {
   user: null,
   token: null,
   isRefreshing: false,
@@ -38,6 +38,11 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(logOut.fulfilled, (state) => {
+        state.user = null;
+        state.token = null;
+        state.isLoggedIn = false;
+      })
+      .addCase(logOut.rejected, (state) => {
         state.user = null;
         state.token = null;
         state.isLoggedIn = false;

@@ -8,9 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch } from './redux/store';
 import { selectIsLogged, selectIsRefreshing } from './redux/selectors';
 import { getCurrentUser, refreshToken } from './redux/auth/operations';
-import RecomendedPage from './pages/RecomendedPage';
+import RecomendedPage from './pages/RecommendedPage';
 import LibraryPage from './pages/LibraryPage';
 import ReadingPage from './pages/ReadingPage';
+import Loader from './components/Loader';
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -39,27 +40,27 @@ function App() {
   const MainLayoutPage = lazy(() => import('./pages/MainLayoutPage'));
 
   return isRefreshing ? (
-    <b>Refreshing user...</b>
+    <Loader />
   ) : (
     <Layout>
       <Routes>
         <Route
           path='/register'
           element={
-            <RestrictedRoute redirectTo='/recomended' component={<RegistrationPage />} />
+            <RestrictedRoute redirectTo='/recommended' component={<RegistrationPage />} />
           }
         />
         <Route
           path='/login'
-          element={<RestrictedRoute redirectTo='/recomended' component={<LoginPage />} />}
+          element={<RestrictedRoute redirectTo='/recommended' component={<LoginPage />} />}
         />
         <Route
-          path='/'
+            path='/'
           element={
             <PrivateRoute redirectTo='/login' component={<MainLayoutPage />} />
           }
         >
-          <Route path='recomended' element={<RecomendedPage />} />
+          <Route path='recommended' element={<RecomendedPage />} />
           <Route path='library' element={<LibraryPage />} />
           <Route path='reading' element={<ReadingPage />} />
         </Route>

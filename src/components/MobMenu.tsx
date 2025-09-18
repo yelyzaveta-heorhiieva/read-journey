@@ -1,4 +1,4 @@
-import React from 'react';
+
 import UserNav from './UserNav';
 import LogoutBtn from './LogoutBtn';
 
@@ -19,7 +19,7 @@ export default function MobMenu({onClick, isOpen }: MobMenuProps) {
           <use href='/icons.svg#close'></use>
         </svg>
       </button>
-      <UserNav />
+      <UserNav onClick={onClick} />
       <LogoutBtn />
     </div>
   );
