@@ -9,7 +9,6 @@ export default {
       },
       screens: {
         xs: '375px',
-        xls: '1440px',
         retina: {
           raw: 'screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 2dppx), screen and (min-resolution: 192dpi)',
         },

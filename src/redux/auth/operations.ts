@@ -1,4 +1,3 @@
-
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import toast from 'react-hot-toast';
 import type { AuthFormValues } from '../../types';
@@ -61,6 +60,7 @@ export const getCurrentUser = createAsyncThunk(
       const response = await api.get('/users/current');
       return response.data;
     } catch (e: any) {
+      toast.error('Refresh failed');
       return thunkAPI.rejectWithValue(e.message);
     }
   },
@@ -81,7 +81,7 @@ export const refreshToken = createAsyncThunk(
       return response.data;
     } catch (e: any) {
       toast.error('Refresh failed');
-       localStorage.removeItem('refreshToken')
+      localStorage.removeItem('refreshToken');
       return thunkAPI.rejectWithValue(e.message);
     }
   },
