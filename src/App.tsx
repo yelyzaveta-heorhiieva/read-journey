@@ -6,11 +6,11 @@ import RestrictedRoute from './components/RestrictedRoute';
 import NotFoundPage from './pages/NotFoundPage';
 import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch } from './redux/store';
-import {
-  selectIsLogged,
-  selectIsRefreshing,
-} from './redux/selectors';
+import { selectIsLogged, selectIsRefreshing } from './redux/selectors';
 import { getCurrentUser, refreshToken } from './redux/auth/operations';
+import RecomendedPage from './pages/RecomendedPage';
+import LibraryPage from './pages/LibraryPage';
+import ReadingPage from './pages/ReadingPage';
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -38,39 +38,34 @@ function App() {
   const LoginPage = lazy(() => import('./pages/LoginPage'));
   const MainLayoutPage = lazy(() => import('./pages/MainLayoutPage'));
 
-  return (isRefreshing ? (
+  return isRefreshing ? (
     <b>Refreshing user...</b>
   ) : (
-      <Layout>
-        <Routes>
-          <Route
-            path='/register'
-            element={
-              <RestrictedRoute
-                redirectTo='/'
-                component={<RegistrationPage />}
-              />
-            }
-          />
-          <Route
-            path='/login'
-            element={
-              <RestrictedRoute redirectTo='/' component={<LoginPage />} />
-            }
-          />
-          <Route
-            path='/'
-            element={
-              <PrivateRoute
-                redirectTo='/login'
-                component={<MainLayoutPage />}
-              />
-            }
-          />
-          <Route path='*' element={<NotFoundPage />} />
-        </Routes>
-      </Layout>
-    )
+    <Layout>
+      <Routes>
+        <Route
+          path='/register'
+          element={
+            <RestrictedRoute redirectTo='/' component={<RegistrationPage />} />
+          }
+        />
+        <Route
+          path='/login'
+          element={<RestrictedRoute redirectTo='/' component={<LoginPage />} />}
+        />
+        <Route
+          path='/'
+          element={
+            <PrivateRoute redirectTo='/login' component={<MainLayoutPage />} />
+          }
+        >
+          <Route path='recomended' element={<RecomendedPage />} />
+          <Route path='library' element={<LibraryPage />} />
+          <Route path='reading' element={<ReadingPage />} />
+        </Route>
+        <Route path='*' element={<NotFoundPage />} />
+      </Routes>
+    </Layout>
   );
 }
 
