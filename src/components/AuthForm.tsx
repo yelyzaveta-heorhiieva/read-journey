@@ -86,9 +86,6 @@ export default function AuthForm({ isRegister, link, handleSubmit }: AuthFormPro
               {((!errors.password && !touched.password) || show) && (
                 <button
                   type='button'
-                  onClick={
-                    !isBigScreen ? () => setShow((prev) => !prev) : undefined
-                  }
                   className={`absolute top-1/2 right-4 translate-y-[-50%] 
       group-hover:right-[15px] md:group-hover:right-[17px] md:right-[18px] 
       ${!isBigScreen ? 'cursor-pointer' : 'cursor-auto'}`}

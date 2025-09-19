@@ -30,12 +30,12 @@ export default function Input({
       <label
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        className={`group relative flex items-center gap-[10px] w-full h-[44px] md:h-[50px] p-[14px] md:py-4 rounded-xl bg-[#262626] hover:border hover:border-solid hover:border-[rgba(249,249,249,0.1)] hover:p-[13px] hover:md:py-[15px]  ${
+        className={`group relative flex items-center gap-[10px] w-full h-[44px] md:h-[50px]  rounded-xl bg-[#262626] hover:border hover:border-solid hover:border-[rgba(249,249,249,0.1)] hover:p-[13px] hover:md:py-[15px]  ${
           touched && error
-            ? 'border border-[#e90516] p-[13px]'
+            ? 'border border-[#e90516] p-[13px] md:py-[15px]'
             : touched
-            ? 'border border-[#30b94d] p-[13px]'
-            : 'border-none'
+            ? 'border border-[#30b94d] p-[13px] md:py-[15px]'
+            : 'border-none p-[14px] md:py-4'
         }`}
       >
         <span className='text-nowrap font-medium text-xs md:text-sm md:leading-[129%] leading-[133%] tracking-[-0.02em] text-[#686868]'>
