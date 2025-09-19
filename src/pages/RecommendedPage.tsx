@@ -9,7 +9,6 @@ import type { FiltersValues } from '../types';
 import type { FormikHelpers } from 'formik';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '../redux/store';
-import { getRecommended } from '../redux/books/operations';
 import { useState } from 'react';
 import { resetPage } from '../redux/books/slice';
 
@@ -29,7 +28,7 @@ export default function RecomendedPage({}: RecomendedPageProps) {
   };
 
   return (
-    <div className='mt-1 flex flex-col gap-[10px] md:mt-4 md:gap-4 xl:flex-row'>
+    <div className='pages-box'>
       <Dashboard>
         <Filters handleSubmit={handleSubmit} />
         <WorkoutBlock />
@@ -50,7 +49,10 @@ export default function RecomendedPage({}: RecomendedPageProps) {
           </div>
         )}
       </Dashboard>
-      <RecomendedBooks filters={filters} resetFilters={()=>setFilters(null)}/>
+      <RecomendedBooks
+        filters={filters}
+        resetFilters={() => setFilters(null)}
+      />
     </div>
   );
 }

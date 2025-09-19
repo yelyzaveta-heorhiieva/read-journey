@@ -42,11 +42,9 @@ export default function RecomendedBooks({
   }, [dispatch, page, limit, filters]);
 
   return (
-    <section className='bg-[#1f1f1f] rounded-[30px] py-10 px-5 h-[382px] md:h-[663px] md:px-10 xl:pb-7 xl:h-[651px] w-full'>
+    <section className='secondBlock'>
       <div className='flex justify-between mb-[22px] md:mb-5'>
-        <h2 className='font-bold text-xl leading-[100%] tracking-[-0.02em] xl:text-[28px] xl:leading-[114%]'>
-          Recommended
-        </h2>
+        <h2 className='secondBlock-title'>Recommended</h2>
         <ul className='flex gap-2'>
           <li>
             <PaginationBtn

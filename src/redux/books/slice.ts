@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { Book } from '../../types';
-import { addBookfromRecommended, getOwnBooks, getRecommended } from './operations';
+import { addBook, addBookfromRecommended, getOwnBooks, getRecommended, removeBook } from './operations';
 
 export interface BooksState {
   recommended: Book[];
@@ -48,10 +48,31 @@ const booksSlice = createSlice({
       .addCase(addBookfromRecommended.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(addBookfromRecommended.fulfilled, (state) => {
+      .addCase(addBookfromRecommended.fulfilled, (state, action) => {
         state.isLoading = false;
+         state.ownBooks = [...state.ownBooks, action.payload];
       })
       .addCase(addBookfromRecommended.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(addBook.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addBook.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.ownBooks = [...state.ownBooks, action.payload];
+      })
+      .addCase(addBook.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(removeBook.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(removeBook.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.ownBooks = state.ownBooks.filter(item=>item._id !== action.payload.id);
+      })
+      .addCase(removeBook.rejected, (state) => {
         state.isLoading = false;
       })
       .addCase(getOwnBooks.pending, (state) => {

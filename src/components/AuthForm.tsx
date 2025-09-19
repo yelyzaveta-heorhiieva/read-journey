@@ -115,7 +115,7 @@ export default function AuthForm({
             <button
               type='submit'
               disabled={!isValid}
-              className={` h-[42px] md:h-[52px] bg-[#f9f9f9] rounded-[30px] flex items-center justify-center font-bold text-sm md:text-xl md:leading-[100%] leading-[129%] tracking-[0.02em] text-[#1f1f1f] hover:border hover:border-solid hover:border-[rgba(249,249,249,0.2)] hover:bg-transparent hover:text-[#f9f9f9] transition-all duration-300
+              className={` h-[42px] md:h-[52px] bg-[#f9f9f9] rounded-[30px] flex items-center justify-center font-bold text-sm md:text-xl md:leading-[100%] leading-[129%] tracking-[0.02em] text-[#1f1f1f] hover:border hover:border-solid hover:border-[rgba(249,249,249,0.2)] hover:bg-transparent hover:text-[#f9f9f9] transition-all duration-300 disabled:bg-[rgba(249,249,249,0.51)]
             ${
               isRegister ? 'w-[140px] md:w-[225px]' : 'w-[131px] md:w-[166px]'
             }`}

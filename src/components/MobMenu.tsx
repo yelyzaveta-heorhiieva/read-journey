@@ -10,7 +10,7 @@ export interface MobMenuProps {
 export default function MobMenu({onClick, isOpen }: MobMenuProps) {
   return (
     <div
-      className={`fixed h-[100%] w-[52%] top-0 right-0 flex flex-col justify-end items-center py-10 ${
+      className={`fixed h-[100%] w-[52%] z-[2000] top-0 right-0 flex flex-col justify-end items-center py-10 ${
         isOpen ? 'translate-x-0 opacity-100' : 'translate-x-[100%] opacity-0'
       } transition-all duration-500 bg-[#262626]`}
     >

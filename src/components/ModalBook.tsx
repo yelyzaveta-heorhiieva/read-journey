@@ -1,20 +1,29 @@
 import React, { useEffect } from 'react';
-import defoltImg from '../assets/images/1x/book-mob.png';
-import type { Book } from '../types';
-import { useDispatch } from 'react-redux';
+import defaultImg from '../assets/images/1x/book-mob.png';
+import type { RecommendedBook } from '../types';
+import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch } from '../redux/store';
-import { addBookfromRecommended } from '../redux/books/operations';
+import { addBookfromRecommended, getOwnBooks } from '../redux/books/operations';
 import { useMediaQuery } from 'react-responsive';
+import { selectOwnBooks } from '../redux/selectors';
+import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 export interface ModalBookProps {
-  item: Book;
+  item: RecommendedBook;
   onClose: () => void;
+  library?: boolean;
 }
 
-export default function ModalBook({ item, onClose }: ModalBookProps) {
+export default function ModalBook({ item, onClose, library }: ModalBookProps) {
   const { _id, imageUrl, title, author, totalPages } = item;
   const dispatch = useDispatch<AppDispatch>();
-  const isMob = useMediaQuery({maxWidth: 767})
+  const ownBooks = useSelector(selectOwnBooks)
+  const isMob = useMediaQuery({ maxWidth: 767 })
+  
+    useEffect(() => {
+      dispatch(getOwnBooks());
+    }, [dispatch]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -26,6 +35,13 @@ export default function ModalBook({ item, onClose }: ModalBookProps) {
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
   }, []);
+
+  const handleClick = () => {
+    if (ownBooks.some(item => item.title === title)) {
+      return toast.error('This book is already in your library')
+    }
+    dispatch(addBookfromRecommended(_id));
+  }
 
   return (
     <div
@@ -45,7 +61,7 @@ export default function ModalBook({ item, onClose }: ModalBookProps) {
           </svg>
         </button>
         <img
-          src={imageUrl || defoltImg}
+          src={imageUrl || defaultImg}
           alt='book'
           width={isMob ? '140' : '153'}
           height={isMob ? '213' : '233'}
@@ -63,13 +79,15 @@ export default function ModalBook({ item, onClose }: ModalBookProps) {
         <p className='font-medium text-[10px] leading-[120%] tracking-[-0.02em] text-center mb-5 md:mb-8'>
           {totalPages} pages
         </p>
-        <button
-          type='button'
-          onClick={() => dispatch(addBookfromRecommended(_id))}
-          className='font-bold text-sm leading-[129%] tracking-[0.02em] mx-auto border w-[141px] h-[42px] flex justify-center items-center rounded-[30px] border-solid border-[rgba(249,249,249,0.2)] hover:bg-[#f9f9f9] hover:text-[#1f1f1f] transition-all md:w-[162px] md:h-[46px] md:text-base md:leading-[112%]'
-        >
-          Add to library
-        </button>
+        {!library ? (
+          <button type='button' onClick={handleClick} className='modalBtn'>
+            Add to library
+          </button>
+        ) : (
+          <Link to='/reading' className='modalBtn'>
+            Start reading
+          </Link>
+        )}
       </div>
     </div>
   );

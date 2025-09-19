@@ -12,6 +12,7 @@ import RecomendedPage from './pages/RecommendedPage';
 import LibraryPage from './pages/LibraryPage';
 import ReadingPage from './pages/ReadingPage';
 import Loader from './components/Loader';
+import './App.css'
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
