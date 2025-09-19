@@ -11,11 +11,11 @@ export interface AddBookNotificationProps {
 
 export default function AddBookNotification({onClose}: AddBookNotificationProps) {
   return (
-    <Modal onClose={onClose}>
-      <div className='p-5 flex items-center flex-col'>
-        <picture className='mb-5'>
+    <Modal onClose={onClose} classNames='md:w-[342px]'>
+      <div className='p-5 flex items-center flex-col md:py-0 md:px-[10px]'>
+        <picture className='mb-5 md:mb-8'>
           <source
-            media='(min-width: 1280px)'
+            media='(min-width: 768px)'
             srcSet={`${likeDesk} 1x, ${likeDesk_2x} 2x`}
           />
           <source
@@ -24,10 +24,10 @@ export default function AddBookNotification({onClose}: AddBookNotificationProps)
           />
           <img src={likeMob} alt='books' />
         </picture>
-        <h2 className='font-bold text-lg leading-[100%] tracking-[-0.02em] text-center mb-[10px]'>
+        <h2 className='font-bold text-lg leading-[100%] tracking-[-0.02em] text-center mb-[10px] md:text-xl md:leading-[100%] md:mb-[14px]'>
           Good job
         </h2>
-        <p className='font-medium text-sm leading-[129%] tracking-[-0.02em] text-center text-[#686868]'>
+        <p className='font-medium text-sm leading-[129%] tracking-[-0.02em] text-center text-[#686868] md:max-w-[242px]'>
           Your book is now in{' '}
           <span className='text-[#f9f9f9]'>the library!</span> The joy knows no
           bounds and now you can start your training

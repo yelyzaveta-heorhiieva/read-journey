@@ -41,7 +41,7 @@ export default function ModalBook({
   };
 
   return (
-    <Modal onClose={onClose}>
+    <Modal onClose={onClose} classNames='md:w-[500px]'>
       <img
         src={imageUrl || defaultImg}
         alt='book'

@@ -48,7 +48,7 @@ export default function Input({
           name={name}
           className='outline-none w-full
           border-none placeholder-[#f9f9f9] bg-[transparent] md:text-sm md:leading-[129%]
-          font-medium text-xs leading-[133%] tracking-[-0.02em] text-[#f9f9f9]'
+          font-medium text-xs leading-[133%] tracking-[-0.02em] text-[#f9f9f9] truncate'
         />
         {children}
         {isValidate && (

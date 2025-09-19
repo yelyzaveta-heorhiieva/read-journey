@@ -42,7 +42,7 @@ export default function MyLibraryBooks({}: MyLibraryBooksProps) {
   }, [selectedOption, ownBooks]);
 
   return (
-    <section className='secondBlock-library'>
+    <section className='secondBlock-library h-[518px] xl:h-[651px]'>
       <div className='flex mb-[14px] justify-between'>
         <h2 className='secondBlock-title'>My library</h2>
         <SelectFilter handleChange={handleChange} selected={selectedOption} />
@@ -54,11 +54,11 @@ export default function MyLibraryBooks({}: MyLibraryBooksProps) {
           ))}
         </ul>
       ) : (
-        <div className='flex flex-col justify-center items-center h-[273px]'>
-          <div className='rounded-full bg-[#262626] w-[100px] h-[100px] flex justify-center items-center mb-[10px] '>
+        <div className='flex flex-col justify-center items-center h-[273px] md:mt-[86px] md:justify-start xl:mt-[147px]'>
+          <div className='rounded-full bg-[#262626] w-[100px] h-[100px] flex justify-center items-center mb-[10px] md:w-[130px] md:h-[130px] md:mb-5 '>
             <picture>
               <source
-                media='(min-width: 1280px)'
+                media='(min-width: 768px)'
                 srcSet={`${booksDesk} 1x, ${booksDesk_2x} 2x`}
               />
               <source
@@ -69,14 +69,15 @@ export default function MyLibraryBooks({}: MyLibraryBooksProps) {
             </picture>
           </div>
           {selectedOption?.value === 'all' ? (
-            <p className='max-w-[197px] font-medium text-sm leading-[129%] tracking-[-0.02em] text-center'>
+            <p className='max-w-[197px] md:max-w-[274px] font-medium text-sm leading-[129%] tracking-[-0.02em] text-center'>
               To start training, add{' '}
               <span className='text-[#686868]'>some of your books</span> or from
               the recommended ones
             </p>
           ) : (
-            <p className='max-w-[197px] font-medium text-sm leading-[129%] tracking-[-0.02em] text-center'>
-              There are no books for your request, you can add some and start reading now.
+            <p className='max-w-[197px] md:max-w-[274px] font-medium text-sm leading-[129%] tracking-[-0.02em] text-center'>
+              There are no books for your request, you can add some and start
+              reading now.
             </p>
           )}
         </div>

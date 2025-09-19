@@ -53,9 +53,9 @@ export default function AddBook({}: AddBookProps) {
   });
 
   return (
-    <div className='w-full'>
+    <div className='w-full md:min-w-[295px]'>
       <p className='ml-[14px] mb-2 font-medium text-[10px] leading-[120%] tracking-[-0.02em] md:text-sm md:leading-[129%]'>
-        Filters:
+        Create your library:
       </p>
       <Formik
         initialValues={initialValues}
@@ -94,14 +94,16 @@ export default function AddBook({}: AddBookProps) {
             <button
               type='submit'
               disabled={!isValid}
-              className='mt-3 border w-[105px] h-[38px] flex items-center justify-center rounded-[30px] border-solid border-[rgba(249,249,249,0.2)] font-bold text-sm leading-[129%] tracking-[0.02em] md:w-[122px] md:h-[42px] md:text-base md:leading-[112%] hover:bg-[#f9f9f9] hover:text-[#1f1f1f] transition-all duration-300 disabled:bg-[rgba(249,249,249,0.51)]'
+              className='mt-3 border w-[105px] h-[38px] flex items-center justify-center rounded-[30px] border-solid border-[rgba(249,249,249,0.2)] font-bold text-sm leading-[129%] tracking-[0.02em] md:mt-[30px] md:w-[131px] md:h-[42px] md:text-base md:leading-[112%] hover:bg-[#f9f9f9] hover:text-[#1f1f1f] transition-all duration-300 disabled:bg-[rgba(249,249,249,0.51)] xl:mt-3 xl:mb-[58px]'
             >
               Add book
             </button>
           </Form>
         )}
-          </Formik>
-          {openNofification && <AddBookNotification onClose={()=>setOpenNotification(false)} />}
+      </Formik>
+      {openNofification && (
+        <AddBookNotification onClose={() => setOpenNotification(false)} />
+      )}
     </div>
   );
 }

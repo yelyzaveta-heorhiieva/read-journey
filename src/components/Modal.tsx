@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 
 export interface ModalProps {
   onClose: () => void;
-    children: React.ReactNode;
+  children: React.ReactNode;
+  classNames: string;
 }
 
-export default function Modal({ onClose, children }: ModalProps) {
+export default function Modal({ onClose, children, classNames }: ModalProps) {
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -24,7 +25,7 @@ export default function Modal({ onClose, children }: ModalProps) {
         (e.target as HTMLElement) === e.currentTarget && onClose()
       }
     >
-      <div className='absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 border w-[335px] p-10 rounded-xl border-solid border-[rgba(104,104,104,0.2)] bg-[#1f1f1f] z-[1100] md:w-[500px] md:py-[50px]'>
+      <div className={`absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 border w-[335px] p-10 rounded-xl border-solid border-[rgba(104,104,104,0.2)] bg-[#1f1f1f] z-[1100] ${classNames} md:py-[50px]`}>
         <button
           type='button'
           onClick={onClose}
