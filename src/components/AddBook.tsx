@@ -5,11 +5,14 @@ import Input from './Input';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '../redux/store';
 import { addBook } from '../redux/books/operations';
+import { useState } from 'react';
+import AddBookNotification from './AddBookNotification';
 
 export interface AddBookProps {}
 
 export default function AddBook({}: AddBookProps) {
-  const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useDispatch<AppDispatch>();
+     const [openNofification, setOpenNotification] = useState(false);
 
   const initialValues: FiltersValues = {
     title: '',
@@ -27,7 +30,9 @@ export default function AddBook({}: AddBookProps) {
         title: values?.title?.trim(),
         totalPages: Number(values?.totalPages),
       }),
-    );
+    )
+      .unwrap()
+      .then(() => setOpenNotification(true));
     actions.resetForm();
   };
 
@@ -95,7 +100,8 @@ export default function AddBook({}: AddBookProps) {
             </button>
           </Form>
         )}
-      </Formik>
+          </Formik>
+          {openNofification && <AddBookNotification onClose={()=>setOpenNotification(false)} />}
     </div>
   );
 }

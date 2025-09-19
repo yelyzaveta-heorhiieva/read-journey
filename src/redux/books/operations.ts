@@ -30,7 +30,6 @@ export const addBookfromRecommended = createAsyncThunk(
   async (id: string, thunkAPI) => {
     try {
         const { data } = await api.post(`/books/add/${id}`);
-      toast.success('Book is succesfully added to your library');
       return data;
     } catch (e: any) {
       toast.error(JSON.parse(e.request.response).message);
@@ -44,7 +43,6 @@ export const addBook = createAsyncThunk(
   async (credentials: FiltersValues, thunkAPI) => {
     try {
       const { data } = await api.post('/books/add/', credentials);
-      toast.success('Book is succesfully added to your library');
       return data;
     } catch (e: any) {
       toast.error(JSON.parse(e.request.response).message);

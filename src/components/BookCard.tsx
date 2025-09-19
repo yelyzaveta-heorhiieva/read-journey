@@ -5,7 +5,7 @@ import defaultImg from '../assets/images/1x/book-mob.png';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '../redux/store';
 import { removeBook } from '../redux/books/operations';
-
+import AddBookNotification from './AddBookNotification';
 
 export interface BookCardProps {
   item: RecommendedBook;
@@ -16,6 +16,7 @@ export default function BookCard({ item, library }: BookCardProps) {
   const { imageUrl, title, author, _id } = item;
   const dispatch = useDispatch<AppDispatch>();
   const [openModal, setOpenModal] = useState(false);
+  const [openNofification, setOpenNotification] = useState(false);
   return (
     <li>
       <img
@@ -51,7 +52,15 @@ export default function BookCard({ item, library }: BookCardProps) {
         )}
       </div>
       {openModal && (
-        <ModalBook item={item} onClose={() => setOpenModal((prev) => !prev)} library={library} />
+        <ModalBook
+          item={item}
+          onClose={() => setOpenModal((prev) => !prev)}
+          openNotification={() => setOpenNotification(true)}
+          library={library}
+        />
+      )}
+      {openNofification && (
+        <AddBookNotification onClose={() => setOpenNotification(false)} />
       )}
     </li>
   );
