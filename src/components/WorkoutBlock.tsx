@@ -15,7 +15,7 @@ const arr = [
 
 export default function WorkoutBlock({}: WorkoutBlockProps) {
   return (
-    <div className='bg-[#262626] rounded-xl p-5 xl:mb-5 w-full md:max-w-[313px]'>
+    <div className='bg-[#262626] rounded-xl p-5 w-full md:max-w-[313px]'>
       <h2 className='font-bold text-lg leading-[100%] tracking-[-0.02em] mb-5 md:text-xl md:mb-10 md:leading-[100%]'>
         Start your workout
       </h2>

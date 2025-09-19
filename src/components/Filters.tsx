@@ -17,7 +17,7 @@ export default function Filters({handleSubmit}: FiltersProps) {
 
  
   return (
-    <div className='mb-5 w-full'>
+    <div className='w-full'>
       <p className='ml-[14px] mb-2 font-medium text-[10px] leading-[120%] tracking-[-0.02em] md:text-sm md:leading-[129%]'>
         Filters:
       </p>
@@ -37,7 +37,7 @@ export default function Filters({handleSubmit}: FiltersProps) {
           />
           <button
             type='submit'
-            className='mt-3 border w-[98px] h-[38px] flex items-center justify-center rounded-[30px] border-solid border-[rgba(249,249,249,0.2)] font-bold text-sm leading-[129%] tracking-[0.02em] md:w-[122px] md:h-[42px] md:text-base md:leading-[112%]'
+            className='mt-3 border w-[98px] h-[38px] flex items-center justify-center rounded-[30px] border-solid border-[rgba(249,249,249,0.2)] font-bold text-sm leading-[129%] tracking-[0.02em] md:w-[122px] md:h-[42px] md:text-base md:leading-[112%] '
           >
             To apply
           </button>

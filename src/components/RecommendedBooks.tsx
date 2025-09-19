@@ -26,7 +26,9 @@ export default function RecomendedBooks({
   const recommendedBooks = useSelector(selectRecommended);
   const page = useSelector(selectPage);
   const totalPages = useSelector(selectTotalPages);
-  const limit = useMediaQuery({minWidth: 1280}) ? 10 : useMediaQuery({minWidth: 768}) ? 8 : 2
+  const isDesk = useMediaQuery({ minWidth: 1280 });
+  const isTab = useMediaQuery({ minWidth: 768 });
+  const limit = isDesk ? 10 : isTab ? 8 : 2;
 
   useEffect(() => {
     dispatch(
@@ -40,9 +42,9 @@ export default function RecomendedBooks({
   }, [dispatch, page, limit, filters]);
 
   return (
-    <section className='bg-[#1f1f1f] rounded-[30px] py-10 px-5 h-[382px] md:h-[663px] md:px-10'>
+    <section className='bg-[#1f1f1f] rounded-[30px] py-10 px-5 h-[382px] md:h-[663px] md:px-10 xl:pb-7 xl:h-[651px] w-full'>
       <div className='flex justify-between mb-[22px] md:mb-5'>
-        <h2 className='font-bold text-xl leading-[100%] tracking-[-0.02em]'>
+        <h2 className='font-bold text-xl leading-[100%] tracking-[-0.02em] xl:text-[28px] xl:leading-[114%]'>
           Recommended
         </h2>
         <ul className='flex gap-2'>
@@ -64,14 +66,14 @@ export default function RecomendedBooks({
         </ul>
       </div>
       {recommendedBooks.length > 0 ? (
-        <ul className='flex gap-[21px] md:flex-wrap md:gap-x-[25px] md:gap-y-[27px]'>
+        <ul className='flex gap-[21px] md:flex-wrap md:gap-x-[25px] md:gap-y-[27px] xl:gap-x-5'>
           {recommendedBooks?.map((item) => (
             <BookCard item={item} key={item._id} />
           ))}
         </ul>
       ) : (
         <div className='flex flex-col justify-center items-center h-[90%]'>
-          <p className='mb-10 text-base text-[tomato] text-center'>
+          <p className='mb-10 text-base text-[tomato] text-center md:text-xl'>
             Opps.....there are no recommended books for your request
           </p>
           <button

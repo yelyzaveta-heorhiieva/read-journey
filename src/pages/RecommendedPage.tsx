@@ -29,7 +29,7 @@ export default function RecomendedPage({}: RecomendedPageProps) {
   };
 
   return (
-    <div className='mt-1 flex flex-col gap-[10px] md:mt-4 md:gap-4'>
+    <div className='mt-1 flex flex-col gap-[10px] md:mt-4 md:gap-4 xl:flex-row'>
       <Dashboard>
         <Filters handleSubmit={handleSubmit} />
         <WorkoutBlock />
