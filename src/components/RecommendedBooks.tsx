@@ -8,10 +8,11 @@ import {
   selectTotalPages,
 } from '../redux/selectors';
 import { nextPage, prevPage } from '../redux/books/slice';
-import type { FiltersValues } from '../types';
+import type { FetchRecommended, FiltersValues } from '../types';
 import PaginationBtn from './PaginationBtn';
 import BookCard from './BookCard';
 import { useMediaQuery } from 'react-responsive';
+import { useSearchParams } from 'react-router-dom';
 
 export interface RecomendedBooksProps {
   filters: FiltersValues | null;
@@ -29,16 +30,23 @@ export default function RecomendedBooks({
   const isDesk = useMediaQuery({ minWidth: 1280 });
   const isTab = useMediaQuery({ minWidth: 768 });
   const limit = isDesk ? 10 : isTab ? 8 : 2;
+  const [searchParams, setSearchParams] = useSearchParams();
+
 
   useEffect(() => {
-    dispatch(
-      getRecommended({
-        page,
-        limit,
-        author: filters?.author?.trim()?.toLowerCase() || undefined,
-        title: filters?.title?.trim()?.toLowerCase() || undefined,
-      }),
-    );
+    const params = {
+      page,
+      limit,
+      author: filters?.author?.trim()?.toLowerCase() || undefined,
+      title: filters?.title?.trim()?.toLowerCase() || undefined,
+    };
+
+    const newSearchParams = Object.entries(params).filter(
+      ([_, v]) => v !== undefined,
+    ) as [string, string][];
+
+    dispatch(getRecommended(newSearchParams));
+    setSearchParams(newSearchParams)
   }, [dispatch, page, limit, filters]);
 
   return (
