@@ -7,23 +7,28 @@ import books from '../assets/images/1x/books-mob.png';
 import books_2x from '../assets/images/2x/books-mob@2x.png';
 import type { FiltersValues } from '../types';
 import type { FormikHelpers } from 'formik';
-import { useDispatch } from 'react-redux';
-import type { AppDispatch } from '../redux/store';
-import { useState } from 'react';
-import { resetPage } from '../redux/books/slice';
+import { useSearchParams } from 'react-router-dom';
+import { updateParams } from '../utils/updateParams';
 
 export interface RecomendedPageProps {}
 
 export default function RecomendedPage({}: RecomendedPageProps) {
-  const dispatch = useDispatch<AppDispatch>();
+  const [searchParams, setSearchParams] = useSearchParams();
   const isDesk = useMediaQuery({ minWidth: 1280 });
-  const [filters, setFilters] = useState<FiltersValues | null>(null)
+
   const handleSubmit = (
     values: FiltersValues,
     actions: FormikHelpers<FiltersValues>,
   ) => {
-    setFilters(values)
-    dispatch(resetPage())
+    const filteredEntries = updateParams(
+      {
+        page: 1,
+        author: values?.author?.trim()?.toLowerCase(),
+        title: values?.title?.trim()?.toLowerCase(),
+      },
+      searchParams,
+    );
+    setSearchParams(filteredEntries);
     actions.resetForm();
   };
 
@@ -50,8 +55,6 @@ export default function RecomendedPage({}: RecomendedPageProps) {
         )}
       </Dashboard>
       <RecomendedBooks
-        filters={filters}
-        resetFilters={() => setFilters(null)}
       />
     </div>
   );

@@ -5,11 +5,18 @@ import type { FetchRecommended, FiltersValues } from '../../types';
 
 export const getRecommended = createAsyncThunk(
   'books/recommended',
-  async (params: [string, string][], thunkAPI) => {
-    const searchParams = new URLSearchParams(params);
+  async (params: FetchRecommended, thunkAPI) => {
+    const searchParams = new URLSearchParams(
+      Object.entries(params).filter(([_, v]) => v !== undefined) as [
+        string,
+        string,
+      ][],
+    );
 
     try {
-      const { data } = await api.get(`/books/recommend?${searchParams}`);
+      const { data } = await api.get(
+        `/books/recommend?${searchParams}`,
+      );
       return data;
     } catch (e: any) {
       toast.error(JSON.parse(e.request.response).message);

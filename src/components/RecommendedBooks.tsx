@@ -2,52 +2,40 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch } from '../redux/store';
 import { useEffect } from 'react';
 import { getRecommended } from '../redux/books/operations';
-import {
-  selectPage,
-  selectRecommended,
-  selectTotalPages,
-} from '../redux/selectors';
-import { nextPage, prevPage } from '../redux/books/slice';
-import type { FetchRecommended, FiltersValues } from '../types';
+import { selectRecommended, selectTotalPages } from '../redux/selectors';
+import type { FiltersValues } from '../types';
 import PaginationBtn from './PaginationBtn';
 import BookCard from './BookCard';
 import { useMediaQuery } from 'react-responsive';
 import { useSearchParams } from 'react-router-dom';
+import { updateParams } from '../utils/updateParams';
 
-export interface RecomendedBooksProps {
-  filters: FiltersValues | null;
-  resetFilters: () => void;
-}
+export interface RecomendedBooksProps {}
 
-export default function RecomendedBooks({
-  filters,
-  resetFilters,
-}: RecomendedBooksProps) {
+export default function RecomendedBooks({}: RecomendedBooksProps) {
   const dispatch = useDispatch<AppDispatch>();
   const recommendedBooks = useSelector(selectRecommended);
-  const page = useSelector(selectPage);
   const totalPages = useSelector(selectTotalPages);
   const isDesk = useMediaQuery({ minWidth: 1280 });
   const isTab = useMediaQuery({ minWidth: 768 });
-  const limit = isDesk ? 10 : isTab ? 8 : 2;
+  const defaultLimit = isDesk ? 10 : isTab ? 8 : 2;
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const page = Number(searchParams.get('page')) || 1;
+  const limit = Number(searchParams.get('limit')) || defaultLimit;
+  const author = searchParams.get('author') || undefined;
+  const title = searchParams.get('title') || undefined;
 
   useEffect(() => {
-    const params = {
-      page,
-      limit,
-      author: filters?.author?.trim()?.toLowerCase() || undefined,
-      title: filters?.title?.trim()?.toLowerCase() || undefined,
-    };
-
-    const newSearchParams = Object.entries(params).filter(
-      ([_, v]) => v !== undefined,
-    ) as [string, string][];
-
-    dispatch(getRecommended(newSearchParams));
-    setSearchParams(newSearchParams)
-  }, [dispatch, page, limit, filters]);
+    dispatch(
+      getRecommended({
+        page,
+        limit,
+        author,
+        title,
+      }),
+    );
+  }, [dispatch, page, limit, author, title]);
 
   return (
     <section className='secondBlock'>
@@ -56,14 +44,26 @@ export default function RecomendedBooks({
         <ul className='flex gap-2'>
           <li>
             <PaginationBtn
-              onClick={() => dispatch(prevPage())}
+              onClick={() => {
+                const filteredEntries = updateParams(
+                  { page: page - 1 },
+                  searchParams,
+                );
+                setSearchParams(filteredEntries);
+              }}
               disabled={page <= 1}
               prev={true}
             />
           </li>
           <li>
             <PaginationBtn
-              onClick={() => dispatch(nextPage())}
+              onClick={() => {
+                const filteredEntries = updateParams(
+                  { page: page + 1 },
+                  searchParams,
+                );
+                setSearchParams(filteredEntries);
+              }}
               disabled={
                 (totalPages !== null && page >= totalPages) || !totalPages
               }
@@ -84,7 +84,17 @@ export default function RecomendedBooks({
           </p>
           <button
             type='button'
-            onClick={resetFilters}
+            onClick={() => {
+              const filteredEntries = updateParams(
+                {
+                  page: 1,
+                  author: undefined,
+                  title: undefined,
+                },
+                searchParams,
+              );
+              setSearchParams(filteredEntries);
+            }}
             className='font-bold text-sm leading-[129%] tracking-[0.02em] mx-auto border w-[141px] h-[42px] flex justify-center items-center rounded-[30px] border-solid border-[rgba(249,249,249,0.2)] hover:bg-[#f9f9f9] hover:text-[#1f1f1f] transition-all'
           >
             Show all

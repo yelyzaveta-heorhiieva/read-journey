@@ -4,7 +4,6 @@ import { addBook, addBookfromRecommended, getOwnBooks, getRecommended, removeBoo
 
 export interface BooksState {
   recommended: Book[];
-  page: number;
   totalPages: number | null;
   ownBooks: Book[];
   isLoading: boolean;
@@ -12,7 +11,6 @@ export interface BooksState {
 
 const initialState: BooksState = {
   recommended: [],
-  page: 1,
   totalPages: null,
   ownBooks: [],
   isLoading: false,
@@ -22,15 +20,6 @@ const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
-    nextPage(state) {
-      state.page += 1;
-    },
-    prevPage(state) {
-      state.page -= 1;
-    },
-    resetPage(state) {
-      state.page = 1;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -88,5 +77,5 @@ const booksSlice = createSlice({
   },
 });
 
-export const { nextPage, prevPage, resetPage } = booksSlice.actions;
+
 export default booksSlice.reducer;
