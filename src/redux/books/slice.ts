@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { Book } from '../../types';
-import { addBook, addBookfromRecommended, getOwnBooks, getRecommended, removeBook } from './operations';
+import type { Book, Progress } from '../../types';
+import { addBook, addBookfromRecommended, getOwnBooks, getRecommended, removeBook, startReading, stopReading } from './operations';
 
 export interface BooksState {
   recommended: Book[];
   totalPages: number | null;
   ownBooks: Book[];
   isLoading: boolean;
+  progress: Progress[];
 }
 
 const initialState: BooksState = {
@@ -14,6 +15,7 @@ const initialState: BooksState = {
   totalPages: null,
   ownBooks: [],
   isLoading: false,
+  progress: [],
 };
 
 const booksSlice = createSlice({
@@ -39,7 +41,7 @@ const booksSlice = createSlice({
       })
       .addCase(addBookfromRecommended.fulfilled, (state, action) => {
         state.isLoading = false;
-         state.ownBooks = [...state.ownBooks, action.payload];
+        state.ownBooks = [...state.ownBooks, action.payload];
       })
       .addCase(addBookfromRecommended.rejected, (state) => {
         state.isLoading = false;
@@ -59,7 +61,9 @@ const booksSlice = createSlice({
       })
       .addCase(removeBook.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.ownBooks = state.ownBooks.filter(item=>item._id !== action.payload.id);
+        state.ownBooks = state.ownBooks.filter(
+          (item) => item._id !== action.payload.id,
+        );
       })
       .addCase(removeBook.rejected, (state) => {
         state.isLoading = false;
@@ -73,7 +77,13 @@ const booksSlice = createSlice({
       })
       .addCase(getOwnBooks.rejected, (state) => {
         state.isLoading = false;
-      });
+      })
+      .addCase(startReading.fulfilled, (state, action) => {
+        state.progress = [...action.payload.progress];
+      })
+      .addCase(stopReading.fulfilled, (state, action) => {
+        state.progress = [...action.payload.progress];
+      })
   },
 });
 

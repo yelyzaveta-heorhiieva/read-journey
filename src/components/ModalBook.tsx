@@ -66,7 +66,7 @@ export default function ModalBook({
           Add to library
         </button>
       ) : (
-        <Link to='/reading' className='modalBtn'>
+        <Link to={`/reading/${_id}`} className='modalBtn'>
           Start reading
         </Link>
       )}

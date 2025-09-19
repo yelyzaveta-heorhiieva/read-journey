@@ -49,11 +49,12 @@ export default function AddBook({}: AddBookProps) {
       .typeError('Enter a number')
       .min(1, 'Must be at least 1')
       .max(5000, 'Must be at most 5000')
+      .integer('Must be an integer')
       .required('Required'),
   });
 
   return (
-    <div className='w-full md:min-w-[295px]'>
+    <div className='w-full md:min-w-[295px] xl:mb-[58px]'>
       <p className='ml-[14px] mb-2 font-medium text-[10px] leading-[120%] tracking-[-0.02em] md:text-sm md:leading-[129%]'>
         Create your library:
       </p>
@@ -94,7 +95,7 @@ export default function AddBook({}: AddBookProps) {
             <button
               type='submit'
               disabled={!isValid}
-              className='mt-3 border w-[105px] h-[38px] flex items-center justify-center rounded-[30px] border-solid border-[rgba(249,249,249,0.2)] font-bold text-sm leading-[129%] tracking-[0.02em] md:mt-[30px] md:w-[131px] md:h-[42px] md:text-base md:leading-[112%] hover:bg-[#f9f9f9] hover:text-[#1f1f1f] transition-all duration-300 disabled:bg-[rgba(249,249,249,0.51)] xl:mt-3 xl:mb-[58px]'
+              className='mt-3 border w-[105px] h-[38px] flex items-center justify-center rounded-[30px] border-solid border-[rgba(249,249,249,0.2)] font-bold text-sm leading-[129%] tracking-[0.02em] md:mt-[30px] md:w-[131px] md:h-[42px] md:text-base md:leading-[112%] hover:bg-[#f9f9f9] hover:text-[#1f1f1f] transition-all duration-300 disabled:bg-[rgba(249,249,249,0.51)] xl:mt-3 '
             >
               Add book
             </button>

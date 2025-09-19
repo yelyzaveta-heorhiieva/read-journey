@@ -48,22 +48,30 @@ function App() {
         <Route
           path='/register'
           element={
-            <RestrictedRoute redirectTo='/recommended' component={<RegistrationPage />} />
+            <RestrictedRoute
+              redirectTo='/recommended'
+              component={<RegistrationPage />}
+            />
           }
         />
         <Route
           path='/login'
-          element={<RestrictedRoute redirectTo='/recommended' component={<LoginPage />} />}
+          element={
+            <RestrictedRoute
+              redirectTo='/recommended'
+              component={<LoginPage />}
+            />
+          }
         />
         <Route
-            path='/'
+          path='/'
           element={
             <PrivateRoute redirectTo='/login' component={<MainLayoutPage />} />
           }
         >
           <Route path='recommended' element={<RecomendedPage />} />
-          <Route path='library' element={<LibraryPage />} />
-          <Route path='reading' element={<ReadingPage />} />
+          <Route path='library' element={<LibraryPage />}></Route>
+          <Route path='reading/:bookId' element={<ReadingPage />} />
         </Route>
         <Route path='*' element={<NotFoundPage />} />
       </Routes>

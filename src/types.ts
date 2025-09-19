@@ -60,3 +60,9 @@ export interface Book {
     seconds: number;
   };
 }
+
+
+export interface ReadingCredentials {
+  id: string;
+  page: number;
+}
