@@ -79,6 +79,7 @@ export default function AuthForm({ isRegister, link, handleSubmit }: AuthFormPro
               name='password'
               error={errors.password}
               touched={touched.password}
+              show={show}
               onMouseEnter={() => setShow(true)}
               onMouseLeave={() => setShow(false)}
               isValidate={true}
@@ -86,6 +87,7 @@ export default function AuthForm({ isRegister, link, handleSubmit }: AuthFormPro
               {((!errors.password && !touched.password) || show) && (
                 <button
                   type='button'
+                  onClick={()=>setShow(prev=>!prev)}
                   className={`absolute top-1/2 right-4 translate-y-[-50%] 
       group-hover:right-[15px] md:group-hover:right-[17px] md:right-[18px] 
       ${!isBigScreen ? 'cursor-pointer' : 'cursor-auto'}`}

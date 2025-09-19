@@ -12,6 +12,7 @@ export interface InputProps {
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   isValidate?: boolean;
+  show?: boolean;
 }
 
 export default function Input({
@@ -23,7 +24,7 @@ export default function Input({
   error,
   touched,
   onMouseEnter, 
-  onMouseLeave, isValidate
+  onMouseLeave, isValidate, show
 }: InputProps) {
   return (
     <div>
@@ -60,7 +61,7 @@ export default function Input({
           >
             <use
               href={`/icons.svg#${
-                touched && error ? 'error' : touched ? 'check' : ''
+                (touched && error && !show) ? 'error' : (touched  && !show) ? 'check' : ''
               }`}
             ></use>
           </svg>
