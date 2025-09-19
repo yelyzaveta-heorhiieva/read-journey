@@ -3,20 +3,21 @@ import { useState } from 'react';
 import type { AuthFormValues } from '../types';
 import Input from './Input';
 import { Link } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
 import * as Yup from 'yup';
 
 export interface AuthFormProps {
   isRegister: boolean;
-    link: { to: string; text: string };
-    handleSubmit: (values: AuthFormValues) => void
+  link: { to: string; text: string };
+  handleSubmit: (values: AuthFormValues) => void;
 }
 
-export default function AuthForm({ isRegister, link, handleSubmit }: AuthFormProps) {
+export default function AuthForm({
+  isRegister,
+  link,
+  handleSubmit,
+}: AuthFormProps) {
   const [show, setShow] = useState(false);
-  const isBigScreen = useMediaQuery({
-    query: '(min-width: 1280px)',
-  });
+  const [clicked, setClicked] = useState(false);
 
   const initialValues = {
     name: '',
@@ -79,18 +80,21 @@ export default function AuthForm({ isRegister, link, handleSubmit }: AuthFormPro
               name='password'
               error={errors.password}
               touched={touched.password}
-              show={show}
-              onMouseEnter={() => setShow(true)}
-              onMouseLeave={() => setShow(false)}
+              show={clicked}
+              onMouseEnter={() => {
+                setClicked(true);
+              }}
+              onMouseLeave={() => {
+                setClicked(false);
+              }}
               isValidate={true}
             >
-              {((!errors.password && !touched.password) || show) && (
+              {clicked && (
                 <button
                   type='button'
-                  onClick={()=>setShow(prev=>!prev)}
-                  className={`absolute top-1/2 right-4 translate-y-[-50%] 
-      group-hover:right-[15px] md:group-hover:right-[17px] md:right-[18px] 
-      ${!isBigScreen ? 'cursor-pointer' : 'cursor-auto'}`}
+                  onClick={() => setShow((prev) => !prev)}
+                  className='absolute top-1/2 right-4 translate-y-[-50%] 
+      group-hover:right-[15px] md:group-hover:right-[17px] md:right-[18px]'
                 >
                   <svg
                     width='18'
