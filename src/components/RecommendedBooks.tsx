@@ -11,6 +11,7 @@ import { nextPage, prevPage } from '../redux/books/slice';
 import type { FiltersValues } from '../types';
 import PaginationBtn from './PaginationBtn';
 import BookCard from './BookCard';
+import { useMediaQuery } from 'react-responsive';
 
 export interface RecomendedBooksProps {
   filters: FiltersValues | null;
@@ -25,21 +26,22 @@ export default function RecomendedBooks({
   const recommendedBooks = useSelector(selectRecommended);
   const page = useSelector(selectPage);
   const totalPages = useSelector(selectTotalPages);
+  const limit = useMediaQuery({minWidth: 1280}) ? 10 : useMediaQuery({minWidth: 768}) ? 8 : 2
 
   useEffect(() => {
     dispatch(
       getRecommended({
         page,
-        limit: 2,
+        limit,
         author: filters?.author?.trim()?.toLowerCase() || undefined,
         title: filters?.title?.trim()?.toLowerCase() || undefined,
       }),
     );
-  }, [dispatch, page, filters]);
+  }, [dispatch, page, limit, filters]);
 
   return (
-    <section className='bg-[#1f1f1f] rounded-[30px] py-10 px-5 h-[382px]'>
-      <div className='flex justify-between mb-[22px]'>
+    <section className='bg-[#1f1f1f] rounded-[30px] py-10 px-5 h-[382px] md:h-[663px] md:px-10'>
+      <div className='flex justify-between mb-[22px] md:mb-5'>
         <h2 className='font-bold text-xl leading-[100%] tracking-[-0.02em]'>
           Recommended
         </h2>
@@ -62,7 +64,7 @@ export default function RecomendedBooks({
         </ul>
       </div>
       {recommendedBooks.length > 0 ? (
-        <ul className='flex gap-[21px]'>
+        <ul className='flex gap-[21px] md:flex-wrap md:gap-x-[25px] md:gap-y-[27px]'>
           {recommendedBooks?.map((item) => (
             <BookCard item={item} key={item._id} />
           ))}
