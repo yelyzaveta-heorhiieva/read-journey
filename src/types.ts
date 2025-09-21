@@ -38,11 +38,12 @@ export interface FetchRecommended {
 
 export interface Progress {
   startPage: number;
-  startReading: Date;
+  startReading: string;
   finishPage: number;
-  finishReading: Date;
+  finishReading: string;
   speed: number;
   status: string;
+  _id: string;
 }
 
 export interface Book {
@@ -65,4 +66,9 @@ export interface Book {
 export interface ReadingCredentials {
   id: string;
   page: number;
+}
+
+export interface DeleteProgressArgs {
+  bookId: string;
+  readingId: string;
 }

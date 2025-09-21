@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { RecommendedBook } from '../types';
+import type { Book, RecommendedBook } from '../types';
 import ModalBook from './ModalBook';
 import defaultImg from '../assets/images/1x/book-mob.png';
 import { useDispatch } from 'react-redux';
@@ -8,7 +8,7 @@ import { removeBook } from '../redux/books/operations';
 import AddBookNotification from './AddBookNotification';
 
 export interface BookCardProps {
-  item: RecommendedBook;
+  item: RecommendedBook | Book;
   library?: boolean;
 }
 
@@ -18,7 +18,7 @@ export default function BookCard({ item, library }: BookCardProps) {
   const [openModal, setOpenModal] = useState(false);
   const [openNofification, setOpenNotification] = useState(false);
   return (
-    <li>
+    <>
       <img
         src={imageUrl || defaultImg}
         alt='book'
@@ -45,7 +45,7 @@ export default function BookCard({ item, library }: BookCardProps) {
             onClick={() => dispatch(removeBook(_id))}
             className='w-7 h-7 border border-solid border-[rgba(232,80,80,0.2)] rounded-full bg-[rgba(232,80,80,0.1)] flex items-center justify-center'
           >
-            <svg width='14' height='14'>
+            <svg width='14' height='14' className='stroke-[#e85050]'>
               <use href='/icons.svg#trash'></use>
             </svg>
           </button>
@@ -62,6 +62,6 @@ export default function BookCard({ item, library }: BookCardProps) {
       {openNofification && (
         <AddBookNotification onClose={() => setOpenNotification(false)} />
       )}
-    </li>
+    </>
   );
 }

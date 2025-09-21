@@ -38,7 +38,7 @@ export default function RecomendedBooks({}: RecomendedBooksProps) {
   }, [dispatch, page, limit, author, title]);
 
   return (
-    <section className='secondBlock'>
+    <section className='secondBlock h-[382px] md:h-[663px] xl:h-[651px] '>
       <div className='flex justify-between mb-[22px] md:mb-5'>
         <h2 className='secondBlock-title'>Recommended</h2>
         <ul className='flex gap-2'>
@@ -74,7 +74,9 @@ export default function RecomendedBooks({}: RecomendedBooksProps) {
       {recommendedBooks.length > 0 ? (
         <ul className='flex gap-[21px] md:flex-wrap md:gap-x-[25px] md:gap-y-[27px] xl:gap-x-5'>
           {recommendedBooks?.map((item) => (
-            <BookCard item={item} key={item._id} />
+            <li key={item._id}>
+              <BookCard item={item} />
+            </li>
           ))}
         </ul>
       ) : (

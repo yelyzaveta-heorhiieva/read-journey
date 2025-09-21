@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '../../utils/api';
 import toast from 'react-hot-toast';
-import type { FetchRecommended, FiltersValues, ReadingCredentials } from '../../types';
+import type { DeleteProgressArgs, FetchRecommended, FiltersValues, ReadingCredentials } from '../../types';
 
 export const getRecommended = createAsyncThunk(
   'books/recommended',
@@ -96,6 +96,33 @@ export const stopReading = createAsyncThunk(
   async (credentials: ReadingCredentials, thunkAPI) => {
     try {
       const { data } = await api.post('/books/reading/finish', credentials);
+      return data;
+    } catch (e: any) {
+      toast.error(JSON.parse(e.request.response).message);
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  },
+);
+
+export const getBook = createAsyncThunk(
+  'books/getBook',
+  async (id: string, thunkAPI) => {
+    try {
+      const { data } = await api.get(`/books/${id}`);
+      return data;
+    } catch (e: any) {
+      toast.error(JSON.parse(e.request.response).message);
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  },
+);
+
+export const deleteProgress = createAsyncThunk(
+  'books/deleteProgress',
+  async ({bookId, readingId}: DeleteProgressArgs, thunkAPI) => {
+    try {
+      const { data } = await api.delete(`/books/reading?bookId=${bookId}&readingId=${readingId}`);
+      toast.success('diary deleted');
       return data;
     } catch (e: any) {
       toast.error(JSON.parse(e.request.response).message);

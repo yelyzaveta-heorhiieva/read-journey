@@ -1,13 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { Book, Progress } from '../../types';
-import { addBook, addBookfromRecommended, getOwnBooks, getRecommended, removeBook, startReading, stopReading } from './operations';
+import type { Book, Progress, RecommendedBook } from '../../types';
+import {
+  addBook,
+  addBookfromRecommended,
+  deleteProgress,
+  getBook,
+  getOwnBooks,
+  getRecommended,
+  removeBook,
+  startReading,
+  stopReading,
+} from './operations';
 
 export interface BooksState {
-  recommended: Book[];
+  recommended: RecommendedBook[];
   totalPages: number | null;
   ownBooks: Book[];
   isLoading: boolean;
-  progress: Progress[];
+  book: Book | null;
+  currentPage: number;
 }
 
 const initialState: BooksState = {
@@ -15,14 +26,14 @@ const initialState: BooksState = {
   totalPages: null,
   ownBooks: [],
   isLoading: false,
-  progress: [],
+  book: null,
+  currentPage: 0,
 };
 
 const booksSlice = createSlice({
   name: 'books',
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getRecommended.pending, (state) => {
@@ -78,14 +89,56 @@ const booksSlice = createSlice({
       .addCase(getOwnBooks.rejected, (state) => {
         state.isLoading = false;
       })
+      .addCase(startReading.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(startReading.fulfilled, (state, action) => {
-        state.progress = [...action.payload.progress];
+        state.currentPage =
+          action.payload.progress[
+            action.payload.progress.length - 1
+          ]?.startPage;
+        state.isLoading = false;
+      })
+      .addCase(startReading.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(stopReading.pending, (state) => {
+        state.isLoading = true;
       })
       .addCase(stopReading.fulfilled, (state, action) => {
-        state.progress = [...action.payload.progress];
+        state.isLoading = false;
+        state.book = action.payload;
+        state.currentPage =
+          action.payload.progress[
+            action.payload.progress.length - 1
+          ]?.finishPage;
       })
+      .addCase(stopReading.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(getBook.fulfilled, (state, action) => {
+        state.book = action.payload;
+        state.currentPage =
+          action.payload.progress[action.payload.progress.length - 1]
+            ?.finishPage ||
+          action.payload.progress[action.payload.progress.length - 1]
+            ?.startPage ||
+          0;
+      })
+      .addCase(deleteProgress.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteProgress.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.book = action.payload;
+        state.currentPage =
+          action.payload.progress[action.payload.progress.length - 1]
+            ?.finishPage || 0;
+      })
+      .addCase(deleteProgress.rejected, (state) => {
+        state.isLoading = false;
+      });
   },
 });
-
 
 export default booksSlice.reducer;

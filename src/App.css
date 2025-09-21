@@ -1,13 +1,9 @@
 .pages-box {
-    @apply mt-[10px] flex flex-col gap-[10px] md:mt-4 md:gap-4 xl:flex-row
+    @apply mt-[10px] flex flex-col gap-[10px] md:mt-4 md:gap-4 xl:flex-row mb-10
 }
 
 .secondBlock {
-  @apply  bg-[#1f1f1f] rounded-[30px] py-10 px-5 h-[382px] md:h-[663px] md:px-10 xl:pb-7 xl:h-[651px] w-full
-}
-
-.secondBlock-library {
-    @apply  bg-[#1f1f1f] rounded-[30px] py-10 px-5 md:px-10 xl:pb-7  w-full
+  @apply  bg-[#1f1f1f] rounded-[30px] py-10 px-5  md:px-10 xl:pb-7 w-full 
 }
 
 .secondBlock-title {

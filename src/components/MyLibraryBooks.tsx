@@ -42,7 +42,7 @@ export default function MyLibraryBooks({}: MyLibraryBooksProps) {
   }, [selectedOption, ownBooks]);
 
   return (
-    <section className='secondBlock-library h-[518px] xl:h-[651px]'>
+    <section className='secondBlock h-[518px] xl:h-[651px]'>
       <div className='flex mb-[14px] justify-between'>
         <h2 className='secondBlock-title'>My library</h2>
         <SelectFilter handleChange={handleChange} selected={selectedOption} />
@@ -50,7 +50,9 @@ export default function MyLibraryBooks({}: MyLibraryBooksProps) {
       {filteredBooks.length > 0 ? (
         <ul className='flex gap-[21px] flex-wrap md:gap-x-[25px] md:gap-y-[27px] xl:gap-x-5'>
           {filteredBooks?.map((item) => (
-            <BookCard item={item} key={item._id} library={true} />
+            <li key={item._id}>
+              <BookCard item={item} library={true} />
+            </li>
           ))}
         </ul>
       ) : (

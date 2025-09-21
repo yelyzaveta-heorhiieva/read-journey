@@ -8,6 +8,11 @@ export const selectRecommended = (state: RootState) => state.books.recommended;
 export const selectTotalPages = (state: RootState) => state.books.totalPages;
 export const selectOwnBooks = (state: RootState) => state.books.ownBooks;
 export const selectIsLoading = (state: RootState) => state.books.isLoading;
+export const selectBook = (state: RootState) => state.books.book;
+export const selectCurrentPage = (state: RootState) => state.books.currentPage;
+
+
+
 
 
 
