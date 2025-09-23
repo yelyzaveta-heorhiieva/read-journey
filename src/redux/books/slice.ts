@@ -97,6 +97,7 @@ const booksSlice = createSlice({
           action.payload.progress[
             action.payload.progress.length - 1
           ]?.startPage;
+        state.book = action.payload;
         state.isLoading = false;
       })
       .addCase(startReading.rejected, (state) => {

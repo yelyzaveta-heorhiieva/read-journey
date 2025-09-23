@@ -72,3 +72,7 @@ export interface DeleteProgressArgs {
   bookId: string;
   readingId: string;
 }
+
+export interface FormValues {
+  page: number;
+}

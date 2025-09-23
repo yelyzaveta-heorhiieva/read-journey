@@ -13,3 +13,4 @@
 .modalBtn {
     @apply font-bold text-sm leading-[129%] tracking-[0.02em] mx-auto border w-[141px] h-[42px] flex justify-center items-center rounded-[30px] border-solid border-[rgba(249,249,249,0.2)] hover:bg-[#f9f9f9] hover:text-[#1f1f1f] transition-all md:w-[162px] md:h-[46px] md:text-base md:leading-[112%]
 }
+

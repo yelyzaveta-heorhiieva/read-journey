@@ -82,7 +82,7 @@ export default function Input({
             error
           ) : touched ? (
             <span>
-              <span className='capitalize'>{name}</span> is secure
+              <span className='capitalize'>{name}</span> {name === 'password' ? 'is secure' : 'is valid'}
             </span>
           ) : null}
         </p>

@@ -5,7 +5,7 @@ import defaultImg from '../assets/images/1x/book-mob.png';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '../redux/store';
 import { removeBook } from '../redux/books/operations';
-import AddBookNotification from './AddBookNotification';
+import Notification from './Notification';
 
 export interface BookCardProps {
   item: RecommendedBook | Book;
@@ -60,7 +60,10 @@ export default function BookCard({ item, library }: BookCardProps) {
         />
       )}
       {openNofification && (
-        <AddBookNotification onClose={() => setOpenNotification(false)} />
+        <Notification
+          onClose={() => setOpenNotification(false)}
+          library={true}
+        />
       )}
     </>
   );

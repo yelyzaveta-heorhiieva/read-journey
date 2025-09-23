@@ -6,13 +6,13 @@ import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '../redux/store';
 import { addBook } from '../redux/books/operations';
 import { useState } from 'react';
-import AddBookNotification from './AddBookNotification';
+import Notification from './Notification';
 
 export interface AddBookProps {}
 
 export default function AddBook({}: AddBookProps) {
-    const dispatch = useDispatch<AppDispatch>();
-     const [openNofification, setOpenNotification] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const [openNofification, setOpenNotification] = useState(false);
 
   const initialValues: FiltersValues = {
     title: '',
@@ -103,7 +103,10 @@ export default function AddBook({}: AddBookProps) {
         )}
       </Formik>
       {openNofification && (
-        <AddBookNotification onClose={() => setOpenNotification(false)} />
+        <Notification
+          onClose={() => setOpenNotification(false)}
+          library={true}
+        />
       )}
     </div>
   );

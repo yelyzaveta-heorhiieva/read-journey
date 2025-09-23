@@ -42,7 +42,7 @@ export default function MyLibraryBooks({}: MyLibraryBooksProps) {
   }, [selectedOption, ownBooks]);
 
   return (
-    <section className='secondBlock h-[518px] xl:h-[651px]'>
+    <section className='secondBlock min-h-[518px] xl:min-h-[651px]'>
       <div className='flex mb-[14px] justify-between'>
         <h2 className='secondBlock-title'>My library</h2>
         <SelectFilter handleChange={handleChange} selected={selectedOption} />
