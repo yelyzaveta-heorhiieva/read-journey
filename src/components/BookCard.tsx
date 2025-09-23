@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '../redux/store';
 import { removeBook } from '../redux/books/operations';
 import Notification from './Notification';
+import DefaultImg from './DefaultImg';
 
 export interface BookCardProps {
   item: RecommendedBook | Book;
@@ -19,14 +20,21 @@ export default function BookCard({ item, library }: BookCardProps) {
   const [openNofification, setOpenNotification] = useState(false);
   return (
     <>
-      <img
-        src={imageUrl || defaultImg}
-        alt='book'
-        width='137'
-        height='208'
-        className='rounded-lg w-[137px]  h-[208px] mb-2 cursor-pointer'
-        onClick={() => setOpenModal((prev) => !prev)}
-      />
+      {imageUrl ? (
+        <img
+          src={imageUrl}
+          alt='book'
+          width='137'
+          height='208'
+          className='rounded-lg w-[137px]  h-[208px] mb-2 cursor-pointer'
+          onClick={() => setOpenModal((prev) => !prev)}
+        />
+      ) : (
+        <DefaultImg
+          classNames='w-[137px]  h-[208px] mb-2 cursor-pointer'
+          onClick={() => setOpenModal((prev) => !prev)}
+        />
+      )}
       <div className='flex justify-between items-center'>
         <div className={`${library ? 'max-w-[95px]' : 'max-w-[137px]'}`}>
           <h3

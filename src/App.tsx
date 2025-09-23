@@ -20,20 +20,7 @@ function App() {
   const isLoggedIn = useSelector(selectIsLogged);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const result = await dispatch(getCurrentUser());
-      if (
-        getCurrentUser.rejected.match(result) &&
-        result.payload === 'Request failed with status code 401'
-      ) {
-        const refreshResult = await dispatch(refreshToken());
-        if (refreshToken.fulfilled.match(refreshResult)) {
-          dispatch(getCurrentUser());
-        }
-      }
-    };
-
-    if (isLoggedIn) fetchUser();
+    if (isLoggedIn) dispatch(getCurrentUser());
   }, [dispatch, isLoggedIn]);
 
   const RegistrationPage = lazy(() => import('./pages/RegistrationPage'));

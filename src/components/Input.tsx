@@ -23,11 +23,13 @@ export default function Input({
   children,
   error,
   touched,
-  onMouseEnter, 
-  onMouseLeave, isValidate, show
+  onMouseEnter,
+  onMouseLeave,
+  isValidate,
+  show,
 }: InputProps) {
   return (
-    <div>
+    <div className='relative'>
       <label
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
@@ -61,7 +63,11 @@ export default function Input({
           >
             <use
               href={`/icons.svg#${
-                (touched && error && !show) ? 'error' : (touched  && !show) ? 'check' : ''
+                touched && error && !show
+                  ? 'error'
+                  : touched && !show
+                  ? 'check'
+                  : ''
               }`}
             ></use>
           </svg>
@@ -69,7 +75,11 @@ export default function Input({
       </label>
       {isValidate && (
         <p
-          className={`mt-1 ml-[14px] font-medium text-xs leading-[117%] tracking-[-0.02em]  
+          className={`font-medium text-xs leading-[117%] tracking-[-0.02em] absolute ${
+            name !== 'password' && name !== 'name' && name !== 'email'
+              ? 'bottom-0 left-4'
+              : 'bottom-[-14px] left-4'
+          }
       ${
         touched && error
           ? 'text-[#e90516]'
@@ -82,7 +92,8 @@ export default function Input({
             error
           ) : touched ? (
             <span>
-              <span className='capitalize'>{name}</span> {name === 'password' ? 'is secure' : 'is valid'}
+              <span className='capitalize'>{name}</span>{' '}
+              {name === 'password' ? 'is secure' : 'is valid'}
             </span>
           ) : null}
         </p>

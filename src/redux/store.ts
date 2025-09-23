@@ -13,6 +13,8 @@ import {
   type PersistConfig,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { setupInterceptors } from '../utils/interceptors';
+import { logOut, refreshToken } from './auth/operations';
 
 
 const authPersistConfig: PersistConfig<AuthState> = {
@@ -45,3 +47,4 @@ export const persistor = persistStore(store);
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 
+setupInterceptors(store, refreshToken, logOut);

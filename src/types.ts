@@ -62,7 +62,6 @@ export interface Book {
   };
 }
 
-
 export interface ReadingCredentials {
   id: string;
   page: number;

@@ -6,7 +6,7 @@ export interface DashboardProps {
 
 export default function Dashboard({ children }: DashboardProps) {
   return (
-    <section className='flex flex-col gap-5 rounded-[30px] w-full bg-[#1f1f1f] p-5 md:p-8 md:flex-row md:gap-8 xl:flex-col xl:pt-10 xl:pb-5 xl:px-5 xl:max-w-[353px] xl:gap-5'>
+    <section className='flex flex-col gap-5 rounded-[30px] w-full bg-[#1f1f1f] p-5 md:p-8 md:flex-row md:gap-8 xl:flex-col xl:pt-10 xl:pb-5 xl:px-5 xl:max-w-[353px] xl:gap-5 xl:min-h-[651px]'>
       {children}
     </section>
   );

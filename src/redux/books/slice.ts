@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { Book, Progress, RecommendedBook } from '../../types';
+import { createSlice, isAnyOf} from '@reduxjs/toolkit';
+import type { Book, RecommendedBook } from '../../types';
 import {
   addBook,
   addBookfromRecommended,
@@ -11,6 +11,7 @@ import {
   startReading,
   stopReading,
 } from './operations';
+import { logOut } from '../auth/operations';
 
 export interface BooksState {
   recommended: RecommendedBook[];
@@ -30,45 +31,32 @@ const initialState: BooksState = {
   currentPage: 0,
 };
 
+const setLoading = (state: BooksState) => {
+  state.isLoading = true;
+};
+
+const clearLoading = (state: BooksState) => {
+  state.isLoading = false;
+};
+
 const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getRecommended.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(getRecommended.fulfilled, (state, action) => {
         state.recommended = [...action.payload.results];
         state.totalPages = action.payload.totalPages || null;
         state.isLoading = false;
       })
-      .addCase(getRecommended.rejected, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(addBookfromRecommended.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(addBookfromRecommended.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.ownBooks = [...state.ownBooks, action.payload];
-      })
-      .addCase(addBookfromRecommended.rejected, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(addBook.pending, (state) => {
-        state.isLoading = true;
+        state.ownBooks.push(action.payload);
       })
       .addCase(addBook.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.ownBooks = [...state.ownBooks, action.payload];
-      })
-      .addCase(addBook.rejected, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(removeBook.pending, (state) => {
-        state.isLoading = true;
+        state.ownBooks.push(action.payload);
       })
       .addCase(removeBook.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -76,21 +64,9 @@ const booksSlice = createSlice({
           (item) => item._id !== action.payload.id,
         );
       })
-      .addCase(removeBook.rejected, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(getOwnBooks.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(getOwnBooks.fulfilled, (state, action) => {
         state.ownBooks = [...action.payload];
         state.isLoading = false;
-      })
-      .addCase(getOwnBooks.rejected, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(startReading.pending, (state) => {
-        state.isLoading = true;
       })
       .addCase(startReading.fulfilled, (state, action) => {
         state.currentPage =
@@ -100,12 +76,6 @@ const booksSlice = createSlice({
         state.book = action.payload;
         state.isLoading = false;
       })
-      .addCase(startReading.rejected, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(stopReading.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(stopReading.fulfilled, (state, action) => {
         state.isLoading = false;
         state.book = action.payload;
@@ -113,9 +83,6 @@ const booksSlice = createSlice({
           action.payload.progress[
             action.payload.progress.length - 1
           ]?.finishPage;
-      })
-      .addCase(stopReading.rejected, (state) => {
-        state.isLoading = false;
       })
       .addCase(getBook.fulfilled, (state, action) => {
         state.book = action.payload;
@@ -126,9 +93,6 @@ const booksSlice = createSlice({
             ?.startPage ||
           0;
       })
-      .addCase(deleteProgress.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(deleteProgress.fulfilled, (state, action) => {
         state.isLoading = false;
         state.book = action.payload;
@@ -136,9 +100,32 @@ const booksSlice = createSlice({
           action.payload.progress[action.payload.progress.length - 1]
             ?.finishPage || 0;
       })
-      .addCase(deleteProgress.rejected, (state) => {
-        state.isLoading = false;
-      });
+      .addMatcher(
+        isAnyOf(
+          getRecommended.pending,
+          addBookfromRecommended.pending,
+          addBook.pending,
+          removeBook.pending,
+          getOwnBooks.pending,
+          startReading.pending,
+          stopReading.pending,
+          deleteProgress.pending,
+        ),
+        setLoading,
+      )
+      .addMatcher(
+        isAnyOf(
+          getRecommended.rejected,
+          addBookfromRecommended.rejected,
+          addBook.rejected,
+          removeBook.rejected,
+          getOwnBooks.rejected,
+          startReading.rejected,
+          stopReading.rejected,
+          deleteProgress.rejected,
+        ),
+        clearLoading,
+      );
   },
 });
 

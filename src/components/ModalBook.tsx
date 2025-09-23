@@ -9,6 +9,7 @@ import { selectOwnBooks } from '../redux/selectors';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import Modal from './Modal';
+import DefaultImg from './DefaultImg';
 
 export interface ModalBookProps {
   item: RecommendedBook;
@@ -42,13 +43,17 @@ export default function ModalBook({
 
   return (
     <Modal onClose={onClose} classNames='md:w-[500px]'>
-      <img
-        src={imageUrl || defaultImg}
-        alt='book'
-        width={isMob ? '140' : '153'}
-        height={isMob ? '213' : '233'}
-        className='rounded-lg w-[140px]  h-[213px] mb-4 mx-auto md:w-[153px] md:h-[233px]'
-      />
+      {imageUrl ? (
+        <img
+          src={imageUrl || defaultImg}
+          alt='book'
+          width={isMob ? '140' : '153'}
+          height={isMob ? '213' : '233'}
+          className='rounded-lg w-[140px]  h-[213px] mb-4 mx-auto md:w-[153px] md:h-[233px]'
+        />
+      ) : (
+        <DefaultImg classNames='w-[140px]  h-[213px] mb-4 mx-auto md:w-[153px] md:h-[233px]' />
+      )}
       <h3
         className='font-bold text-lg leading-[100%] tracking-[-0.02em] mb-[2px] text-center md:text-xl md:leading-[100%]'
         title={title}
