@@ -16,9 +16,9 @@ export default function MainLayoutPage({}: MainLayoutPageProps) {
   }, [navigate]);
 
   return (
-    <Container classNames='pt-5 md:pt-8'>
+    <div className='pt-5 md:pt-8'>
       <Header />
       <Outlet />
-    </Container>
+    </div>
   );
 }

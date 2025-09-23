@@ -26,19 +26,19 @@ export default function BookCard({ item, library }: BookCardProps) {
           alt='book'
           width='137'
           height='208'
-          className='rounded-lg w-[137px]  h-[208px] mb-2 cursor-pointer'
+          className='rounded-lg w-[137px] h-[208px] mb-2 cursor-pointer'
           onClick={() => setOpenModal((prev) => !prev)}
         />
       ) : (
         <DefaultImg
-          classNames='w-[137px]  h-[208px] mb-2 cursor-pointer'
+          classNames='w-[137px] h-[208px] mb-2 cursor-pointer'
           onClick={() => setOpenModal((prev) => !prev)}
         />
       )}
       <div className='flex justify-between items-center'>
-        <div className={`${library ? 'max-w-[95px]' : 'max-w-[137px]'}`}>
+        <div className={library ? 'max-w-[95px]' : 'max-w-[95px] xs:max-w-[137px]'}>
           <h3
-            className='font-bold text-sm leading-[129%] tracking-[-0.02em] mb-[2px] text-nowrap truncate '
+            className='font-bold text-sm leading-[129%] tracking-[-0.02em] mb-[2px] truncate '
             title={title}
           >
             {title}

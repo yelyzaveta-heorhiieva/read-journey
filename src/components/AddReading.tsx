@@ -59,7 +59,7 @@ export default function AddReading({ status, handleSubmit }: AddReadingProps) {
   });
 
   return (
-    <div className='w-full md:min-w-[295px] mb-5 '>
+    <div className='w-[full] md:min-w-[295px] mb-5'>
       <p className='ml-[14px] mb-2 font-medium text-[10px] leading-[120%] tracking-[-0.02em] md:text-sm md:leading-[129%]'>
         Start page:
       </p>

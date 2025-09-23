@@ -1,5 +1,5 @@
 .pages-box {
-    @apply mt-[10px] flex flex-col gap-[10px] md:mt-4 md:gap-4 xl:flex-row mb-10
+    @apply w-[100vw] mt-[10px] flex flex-col gap-[10px] md:mt-4 md:gap-4 xl:flex-row mb-10
 }
 
 .secondBlock {

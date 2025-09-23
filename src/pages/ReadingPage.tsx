@@ -12,6 +12,7 @@ import type { FormValues } from '../types';
 import type { FormikHelpers } from 'formik';
 import toast from 'react-hot-toast';
 import Notification from '../components/Notification';
+import Container from '../components/Container';
 
 
 
@@ -48,15 +49,15 @@ export default function ReadingPage({ }: ReadingPageProps) {
   }, [dispatch, bookId])
   
   return (
-    <div className='pages-box'>
-      <Dashboard>
-        <AddReading handleSubmit={handleSubmit} status={status} />
-        <Details />
-      </Dashboard>
-      <MyBook status={status} />
-      {openNofification && (
-        <Notification onClose={() => setOpenNotification(false)} />
-      )}
-    </div>
+    <Container classNames='pages-box'>
+          <Dashboard>
+            <AddReading handleSubmit={handleSubmit} status={status} />
+            <Details />
+          </Dashboard>
+          <MyBook status={status} />
+          {openNofification && (
+            <Notification onClose={() => setOpenNotification(false)} />
+          )}
+    </Container>
   );
 };

@@ -27,26 +27,26 @@ export default function RecommendedMini({}: RecommendedMiniProps) {
       <h3 className='font-bold text-lg leading-[100%] tracking-[-0.02em] text-[#e3e3e3] mb-[14px] md:text-xl md:leading-[100%] md:mb-5'>
         Recommended books
       </h3>
-      <ul className='flex gap-5 mb-[11px] md:mb-5 xl:mb-[14px]'>
+      <ul className='grid grid-cols-3 gap-5 mb-[11px] md:mb-5 xl:mb-[14px]'>
         {recommendedBooks?.map(({ imageUrl, title, author, _id }) => {
           return (
-            <li className='max-w-[71px]' key={_id}>
+            <li key={_id}>
               <img
                 src={imageUrl || defaultImg}
                 alt='book'
-                width='71'
-                height='107'
-                className='rounded-lg mb-2 cursor-pointer w-[71px]  h-[107px]'
+                className='rounded-lg mb-2 cursor-pointer min-w-[71px] h-[107px] md:max-w-[71px]'
               />
-              <h3
-                className='font-bold tracking-[-0.02em] mb-[2px] text-nowrap truncate text-[10px] leading-[120%]  text-[#e3e3e3]'
-                title={title}
-              >
-                {title}
-              </h3>
-              <p className='font-medium text-[10px] leading-[120%] tracking-[-0.02em] text-[#686868]'>
-                {author}
-              </p>
+              <div className='md:max-w-[71px]'>
+                <h3
+                  className='font-bold tracking-[-0.02em] truncate mb-[2px] text-[10px] leading-[120%]  text-[#e3e3e3]'
+                  title={title}
+                >
+                  {title}
+                </h3>
+                <p className='font-medium text-[10px] leading-[120%] tracking-[-0.02em] text-[#686868]'>
+                  {author}
+                </p>
+              </div>
             </li>
           );
         })}

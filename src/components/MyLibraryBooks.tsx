@@ -53,7 +53,7 @@ export default function MyLibraryBooks({}: MyLibraryBooksProps) {
   const totalPages = Math.ceil(filteredBooks.length / limit);
 
   return (
-    <section className='secondBlock min-h-[407px] xl:h-[651px] md:h-[663px]'>
+    <section className='w-full secondBlock min-h-[407px] xl:h-[651px] md:h-[663px]'>
       <div className='flex mb-[14px] justify-between'>
         <h2 className='secondBlock-title'>My library</h2>
         <div className='flex flex-col items-end md:flex-row gap-4 md:items-center'>
