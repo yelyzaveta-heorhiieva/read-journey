@@ -41,8 +41,8 @@ Read Journey is a web application to track your reading journey. It allows you t
  - Tailwind CSS
 
 **👩‍💻 Author**
-  Yelyzaveta Heorhiieva
-  GitHub: @yelyzaveta-heorhiieva
-  LinkedIn: yelyzaveta-heorhiieva
-  Telegram: @heorhiieva_liza
-  Email: heorhiieva.y@gmail.com
+  Yelyzaveta Heorhiieva   
+  GitHub: @yelyzaveta-heorhiieva  
+  LinkedIn: yelyzaveta-heorhiieva  
+  Telegram: @heorhiieva_liza  
+  Email: heorhiieva.y@gmail.com  
