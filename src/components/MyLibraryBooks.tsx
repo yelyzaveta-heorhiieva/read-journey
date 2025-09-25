@@ -30,6 +30,7 @@ export default function MyLibraryBooks({}: MyLibraryBooksProps) {
 
   const handleChange = (option: SingleValue<OptionType>) => {
     setSelectedOption(option);
+    setPage(1);
   };
 
   useEffect(() => {
@@ -37,7 +38,6 @@ export default function MyLibraryBooks({}: MyLibraryBooksProps) {
   }, [dispatch]);
 
   useEffect(() => {
-    setPage(1)
     if (selectedOption?.value === 'all') {
       setFilteredBooks(ownBooks);
     } else {
