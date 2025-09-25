@@ -27,11 +27,11 @@ Read Journey is a web application to track your reading journey. It allows you t
 
 **🌐 Routing**
 ```
-/login	Login page
-/register	Registration page
-/recommended	List of recommended books - queryParams - page, title, author
-/library	Your library
-/reading/:bookId	Reading page for a specific book
+/login	                    Login page
+/register	                Registration page
+/recommended	            List of recommended books - queryParams - page, title, author
+/library	                Your library
+/reading/:bookId	        Reading page for a specific book
 ```
 
 **🛠️ Technologies Used**
@@ -41,8 +41,8 @@ Read Journey is a web application to track your reading journey. It allows you t
  - Tailwind CSS
 
 **👩‍💻 Author**
-Yelyzaveta Heorhiieva
-GitHub: @yelyzaveta-heorhiieva
-LinkedIn: yelyzaveta-heorhiieva
-Telegram: @heorhiieva_liza
-Email: heorhiieva.y@gmail.com
+  Yelyzaveta Heorhiieva
+  GitHub: @yelyzaveta-heorhiieva
+  LinkedIn: yelyzaveta-heorhiieva
+  Telegram: @heorhiieva_liza
+  Email: heorhiieva.y@gmail.com
