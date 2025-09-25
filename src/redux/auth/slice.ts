@@ -24,7 +24,13 @@ export interface AuthState {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    clearUser(state) {
+      state.token = null;
+      state.user = null;
+      state.isLoggedIn = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(register.fulfilled, (state, action) => {
@@ -75,5 +81,7 @@ const authSlice = createSlice({
       });
   },
 });
+
+export const { clearUser } = authSlice.actions;
 
 export default authSlice.reducer;

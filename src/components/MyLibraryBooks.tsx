@@ -37,6 +37,7 @@ export default function MyLibraryBooks({}: MyLibraryBooksProps) {
   }, [dispatch]);
 
   useEffect(() => {
+    setPage(1)
     if (selectedOption?.value === 'all') {
       setFilteredBooks(ownBooks);
     } else {

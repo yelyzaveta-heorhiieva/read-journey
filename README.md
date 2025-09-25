@@ -1,69 +1,48 @@
-# React + TypeScript + Vite
+# 📚 Read Journey
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Read Journey is a web application to track your reading journey. It allows you to manage your library, track reading progress, and view statistics through a reading diary and charts.
 
-Currently, two official plugins are available:
+# 🚀 Features
+**🔐 Authentication**
+ - User login and registration.
+ - Refresh user by refresh token
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**📖 Recommended Books**
+ - Display a list of recommended books.
+ - Filter books by title or author.
+ - Add books to your library with a single click via modal.
 
-## Expanding the ESLint configuration
+**📚 Library**
+ - Add a new book using a form: title, author, number of pages
+ - Delete books from your library.
+ - Filter books by reading progress.
+ - Clicking a book opens a modal to navigate to the reading page.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**📝 Reading Page**
+ - Enter the current page to start reading.
+ - Update the page where you stopped.
+ - Reading diary showing progress: day, reading speed, reading time, number of pages read, persent of reading progress
+ - Progress statistics displayed as a circular chart.
+ - Notification when a book is completed.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**🌐 Routing**
+```
+/login	Login page
+/register	Registration page
+/recommended	List of recommended books - queryParams - page, title, author
+/library	Your library
+/reading/:bookId	Reading page for a specific book
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+**🛠️ Technologies Used**
+ - React + TS
+ - React Router
+ - Redux Toolkit
+ - Tailwind CSS
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**👩‍💻 Author**
+Yelyzaveta Heorhiieva
+GitHub: @yelyzaveta-heorhiieva
+LinkedIn: yelyzaveta-heorhiieva
+Telegram: @heorhiieva_liza
+Email: heorhiieva.y@gmail.com

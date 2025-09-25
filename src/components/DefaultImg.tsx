@@ -4,11 +4,11 @@ import defaultImg_2x from '../assets/images/2x/book-mob@2x.png';
 import defaultImgDesk_2x from '../assets/images/2x/book-desk@2x.png';
 
 export interface DefaultImgProps {
-    classNames?: string;
-    onClick?: () => void;
+  classNames?: string;
+  onClick?: () => void;
 }
 
-export default function DefaultImg({classNames, onClick}: DefaultImgProps) {
+export default function DefaultImg({ classNames, onClick }: DefaultImgProps) {
   return (
     <picture>
       <source
@@ -19,7 +19,12 @@ export default function DefaultImg({classNames, onClick}: DefaultImgProps) {
         media='(max-width: 767px)'
         srcSet={`${defaultImg} 1x, ${defaultImg_2x} 2x`}
       />
-          <img src={defaultImg} alt='book' className={classNames} onClick={onClick}/>
+      <img
+        src={defaultImg}
+        alt='book'
+        className={classNames}
+        onClick={onClick}
+      />
     </picture>
   );
 }

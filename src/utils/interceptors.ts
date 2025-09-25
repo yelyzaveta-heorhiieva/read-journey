@@ -1,29 +1,27 @@
-import type { AsyncThunk } from '@reduxjs/toolkit';
+import type { Action, AsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { api, setAuthHeader } from './api';
 import type { AppDispatch } from '../redux/store';
+import type { AxiosRequestConfig } from 'axios';
 
-type RefreshUserThunk = AsyncThunk<
-  { token: string }, 
-  void, 
-  {}
->;
-
-type LogOutThunk = AsyncThunk<undefined, void, {}>;
+type RefreshUserThunk = AsyncThunk<{ token: string }, void, {}>;
+interface AxiosRequestConfigWithRetry extends AxiosRequestConfig {
+  _retry?: boolean;
+}
 
 export const setupInterceptors = (
   store: { dispatch: AppDispatch },
   refreshUserThunk: RefreshUserThunk,
-  logOutThunk: LogOutThunk,
+  clearUser: () => PayloadAction<void>,
 ): void => {
   api.interceptors.response.use(
     (res) => res,
     async (error) => {
-      const originalRequest = error.config;
-
+      const originalRequest = error.config as AxiosRequestConfigWithRetry;
       if (
         error.response?.status === 401 &&
         !originalRequest._retry &&
-        originalRequest.url !== '/auth/login'
+        originalRequest.url !== '/users/signin' &&
+        originalRequest.url !== '/users/current/refresh'
       ) {
         originalRequest._retry = true;
         try {
@@ -32,14 +30,21 @@ export const setupInterceptors = (
           if (result.meta.requestStatus === 'fulfilled') {
             const newToken = (result.payload as { token: string }).token;
             setAuthHeader(newToken);
-            originalRequest.headers.Authorization = `Bearer ${newToken}`;
+            if (originalRequest.headers) {
+              originalRequest.headers.Authorization = `Bearer ${newToken}`;
+            }
             return api(originalRequest);
+          } else {
+            store.dispatch(clearUser());
           }
         } catch (e) {
-          store.dispatch(logOutThunk());
+          store.dispatch(clearUser());
           return Promise.reject(e);
         }
+      } else {
+        store.dispatch(clearUser());
       }
+
       return Promise.reject(error);
     },
   );

@@ -75,10 +75,10 @@ export default function Input({
       </label>
       {isValidate && (
         <p
-          className={`font-medium text-xs leading-[117%] tracking-[-0.02em] absolute ${
+          className={`font-medium text-xs leading-[117%] tracking-[-0.02em] ${
             name !== 'password' && name !== 'name' && name !== 'email'
-              ? 'bottom-0 left-4'
-              : 'bottom-[-14px] left-4'
+              ? 'absolute bottom-0 left-4'
+              : 'static mt-1 ml-[14px]'
           }
       ${
         touched && error

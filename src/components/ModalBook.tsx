@@ -45,7 +45,7 @@ export default function ModalBook({
     <Modal onClose={onClose} classNames='md:w-[500px]'>
       {imageUrl ? (
         <img
-          src={imageUrl || defaultImg}
+          src={imageUrl}
           alt='book'
           width={isMob ? '140' : '153'}
           height={isMob ? '213' : '233'}

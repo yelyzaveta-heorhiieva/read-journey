@@ -1,5 +1,5 @@
 import { combineReducers, configureStore, type Reducer } from '@reduxjs/toolkit';
-import authReducer, { type AuthState } from './auth/slice'
+import authReducer, { clearUser, type AuthState } from './auth/slice'
 import booksReducer from './books/slice'
 import {
   persistStore,
@@ -14,7 +14,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { setupInterceptors } from '../utils/interceptors';
-import { logOut, refreshToken } from './auth/operations';
+import { refreshToken } from './auth/operations';
 
 
 const authPersistConfig: PersistConfig<AuthState> = {
@@ -47,4 +47,4 @@ export const persistor = persistStore(store);
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 
-setupInterceptors(store, refreshToken, logOut);
+setupInterceptors(store, refreshToken, clearUser);
