@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { Book, RecommendedBook } from '../types';
 import ModalBook from './ModalBook';
-import defaultImg from '../assets/images/1x/book-mob.png';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '../redux/store';
 import { removeBook } from '../redux/books/operations';

@@ -1,5 +1,5 @@
-import React from 'react';
-import type { Book, Progress } from '../types';
+
+import type { Progress } from '../types';
 import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch } from '../redux/store';
 import { deleteProgress } from '../redux/books/operations';

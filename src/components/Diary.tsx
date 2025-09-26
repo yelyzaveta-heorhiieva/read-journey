@@ -34,7 +34,7 @@ export default function Diary({}: DiaryProps) {
       <ul
         className={`grid max-h-[211px] min-h-[211px] w-full  overflow-y-auto pt-4 pl-1 pr-[28px]  diary absolute left-[12px] md:max-h-[252px] md:min-h-[252px]md:max-h-[252px] md:min-h-[252px] md:left-[11px] md:pl-[5px] md:pr-[27px] xl:min-h-[373px] xl:max-h-[373px] xl:pt-5 xl:pl-[9px] xl:pr-[31px]`}
       >
-        {Object.entries(grouped).map(([date, items], i) => (
+        {Object.entries(grouped).map(([date, items], index) => (
           <li
             key={date}
             className='before:content-[""]  before:w-[2px] before:bg-[#1f1f1f] before:h-full relative before:absolute before:left-[7px] before:bottom-0 before:z-10 md:before:left-2 xl:pb-[22px] xl:last:pb-7'
@@ -43,7 +43,7 @@ export default function Diary({}: DiaryProps) {
               <div className='flex gap-[9px] md:gap-[10px]'>
                 <div
                   className={`flex w-4 h-4 ${
-                    i === 0 ? 'bg-[#f9f9f9]' : 'bg-[#686868]'
+                    index === 0 ? 'bg-[#f9f9f9]' : 'bg-[#686868]'
                   } rounded-[4px] items-center justify-center md:w-5 md:h-5`}
                 >
                   <div className='w-2 h-2 bg-[#141414] rounded-[2px] md:w-3 md:h-3'></div>
@@ -59,7 +59,7 @@ export default function Diary({}: DiaryProps) {
             <ul className='ml-[25px] xl:ml-[30px]'>
               {items.events.map((item, i) => (
                 <li key={item._id} className='flex justify-between mb-[17px]'>
-                  <DiaryItem item={item} active={i === 0} />
+                  <DiaryItem item={item} active={i === 0 && index === 0} />
                 </li>
               ))}
             </ul>

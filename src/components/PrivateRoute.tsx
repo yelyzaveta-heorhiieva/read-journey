@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Navigate } from 'react-router-dom';
 import type { Routes } from '../types';
 import { useSelector } from 'react-redux';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import UserNav from './UserNav';
 import UserBar from './UserBar';
 import { useMediaQuery } from 'react-responsive';

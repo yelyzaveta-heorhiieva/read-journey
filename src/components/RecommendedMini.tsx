@@ -34,7 +34,7 @@ export default function RecommendedMini({}: RecommendedMiniProps) {
               <img
                 src={imageUrl || defaultImg}
                 alt='book'
-                className='rounded-lg mb-2 cursor-pointer min-w-[71px] h-[107px] md:max-w-[71px]'
+                className='rounded-lg mb-2 cursor-pointer w-[71px] h-[107px] md:max-w-[71px]'
               />
               <div className='md:max-w-[71px]'>
                 <h3

@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import defaultImg from '../assets/images/1x/book-mob.png';
 import type { RecommendedBook } from '../types';
 import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch } from '../redux/store';

@@ -22,7 +22,7 @@ export default function DefaultImg({ classNames, onClick }: DefaultImgProps) {
       <img
         src={defaultImg}
         alt='book'
-        className={classNames}
+        className={`${classNames} rounded-lg`}
         onClick={onClick}
       />
     </picture>

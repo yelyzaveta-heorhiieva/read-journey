@@ -3,7 +3,6 @@ import type { AppDispatch } from '../redux/store';
 import { useEffect } from 'react';
 import { getRecommended } from '../redux/books/operations';
 import { selectRecommended, selectTotalPages } from '../redux/selectors';
-import type { FiltersValues } from '../types';
 import PaginationBtn from './PaginationBtn';
 import BookCard from './BookCard';
 import { useMediaQuery } from 'react-responsive';
