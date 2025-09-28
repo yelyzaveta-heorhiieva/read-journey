@@ -24,7 +24,7 @@ export default function MyBook({ status }: MyBookProps) {
         <h2 className='secondBlock-title '>My reading</h2>
         {book?.timeLeftToRead && status === 'start' && (
           <p className='font-medium text-xs leading-[133%] tracking-[-0.02em] text-[#686868] md:text-sm md:leading-[129%]'>
-            {`${hoursLeft && hoursLeft > 0 ? hoursLeft + ' hours and' : ''}`}
+            {`${hoursLeft && hoursLeft > 0 ? hoursLeft + ' hours and ' : ''}`}
             {`${
               minutesLeft && minutesLeft > 0
                 ? minutesLeft + ' minutes left'
