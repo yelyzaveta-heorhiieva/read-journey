@@ -30,7 +30,7 @@ export default function MyLibraryBooks({}: MyLibraryBooksProps) {
 
   const handleChange = (option: SingleValue<OptionType>) => {
     setSelectedOption(option);
-    setPage(1);
+    // setPage(1);
   };
 
   useEffect(() => {
@@ -47,6 +47,10 @@ export default function MyLibraryBooks({}: MyLibraryBooksProps) {
       setFilteredBooks(result);
     }
   }, [selectedOption, ownBooks]);
+  
+  useEffect(() => {
+    if (totalPages <= 1) setPage(1);
+  }, [filteredBooks])
 
   const startIndex = (page - 1) * limit;
   const paginatedBooks = filteredBooks.slice(startIndex, startIndex + limit);

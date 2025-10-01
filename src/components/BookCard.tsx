@@ -10,9 +10,10 @@ import DefaultImg from './DefaultImg';
 export interface BookCardProps {
   item: RecommendedBook | Book;
   library?: boolean;
+  mini?: boolean;
 }
 
-export default function BookCard({ item, library }: BookCardProps) {
+export default function BookCard({ item, library, mini }: BookCardProps) {
   const { imageUrl, title, author, _id } = item;
   const dispatch = useDispatch<AppDispatch>();
   const [openModal, setOpenModal] = useState(false);
@@ -23,9 +24,9 @@ export default function BookCard({ item, library }: BookCardProps) {
         <img
           src={imageUrl}
           alt='book'
-          width='137'
-          height='208'
-          className='rounded-lg w-[137px] h-[208px] mb-2 cursor-pointer'
+          className={`rounded-lg  mb-2 cursor-pointer ${
+            mini ? 'w-[71px] h-[107px] md:max-w-[71px]' : 'w-[137px] h-[208px]'
+          }`}
           onClick={() => setOpenModal((prev) => !prev)}
         />
       ) : (
@@ -34,10 +35,20 @@ export default function BookCard({ item, library }: BookCardProps) {
           onClick={() => setOpenModal((prev) => !prev)}
         />
       )}
-      <div className='flex justify-between items-center'>
-        <div className={library ? 'max-w-[95px]' : 'max-w-[95px] xs:max-w-[137px]'}>
+      <div
+        className={
+          mini
+            ? 'max-w-[71px]'
+            : library
+            ? 'min-w-[110px] xs:max-w-[137px] flex justify-between items-center'
+            : 'max-w-[110px] xs:max-w-[137px]'
+        }
+      >
+        <div className={library ? 'max-w-[80px] xs:max-w-[95px]' : ''}>
           <h3
-            className='font-bold text-sm leading-[129%] tracking-[-0.02em] mb-[2px] truncate '
+            className={`${
+              mini ? 'text-[10px] leading-[120%]' : 'text-sm leading-[129%]'
+            } font-bold  tracking-[-0.02em] mb-[2px] truncate`}
             title={title}
           >
             {title}
