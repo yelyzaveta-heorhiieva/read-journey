@@ -30,7 +30,7 @@ export default function MyLibraryBooks({}: MyLibraryBooksProps) {
 
   const handleChange = (option: SingleValue<OptionType>) => {
     setSelectedOption(option);
-    // setPage(1);
+    setPage(1);
   };
 
   useEffect(() => {
@@ -47,15 +47,16 @@ export default function MyLibraryBooks({}: MyLibraryBooksProps) {
       setFilteredBooks(result);
     }
   }, [selectedOption, ownBooks]);
-  
-  useEffect(() => {
-    if (totalPages <= 1) setPage(1);
-  }, [filteredBooks])
 
   const startIndex = (page - 1) * limit;
   const paginatedBooks = filteredBooks.slice(startIndex, startIndex + limit);
-
   const totalPages = Math.ceil(filteredBooks.length / limit);
+
+  useEffect(() => {
+    if (page > totalPages) {
+      setPage(totalPages > 0 ? totalPages : 1);
+    }
+  }, [page, totalPages]);
 
   return (
     <section className='w-full secondBlock min-h-[407px] xl:h-[651px] md:h-[663px]'>
